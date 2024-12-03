@@ -1,0 +1,115 @@
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.category-container {
+    position: relative;
+}
+
+.category-button {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    color:white;
+    border: 1px solid rgb(55 65 81);
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: transparent;
+    min-width: 160px;
+    white-space: nowrap;
+}
+
+.category-button.selected {
+    background: rgb(55 65 81);
+    color: white;
+    border: 1px solid white;
+}
+
+.category-button img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.category-button span {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: white;
+}
+
+.feature-tag {
+    position: absolute;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    background: rgb(55 65 81);
+    border: 1px solid rgb(75 85 101);
+    color: white;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+}
+
+.feature-tag:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    background: rgb(75 85 101);
+}
+
+.feature-tag.dark {
+    background: rgba(0, 0, 0, 0.7);
+    border-color: rgb(55 65 81);
+    color: white;
+}
+
+.feature-tag.dark:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* 轮播卡片样式 */
+.carousel-container {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.carousel-track {
+    position: relative;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease-out;
+}
+
+.carousel-card {
+    position: absolute;
+    width: 250px;
+    height: 150px;
+    transition: all 0.5s ease-out;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.carousel-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* 轮播点样式 */
+.carousel-dots button {
+    transition: all 0.3s ease;
+}
+
+.carousel-dots button:hover {
+    background-color: #4B5563;
+} 

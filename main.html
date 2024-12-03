@@ -3,9 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的网页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>AI 产品精选</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    
+<body class="min-h-screen bg-black">
+    <!-- 固定顶部导航 -->
+    <header class="border-b border-gray-800/50 sticky top-0 z-10 transition-all duration-300" id="header">
+        <div class="container px-8 py-6 backdrop-blur-md bg-black/50">
+            <h1 class="text-xl font-regular tracking-wider text-slate-200">AI 产品精选</h1>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="relative">
+        <div class="max-w-8xl mx-auto px-4 pt-20 grid grid-cols-12 gap-8">
+
+            <!-- 主要内容 -->
+            <div class="col-start-3 col-span-8 space-y-10">
+                <!-- 搜索部分 -->
+                <div class="space-y-10 text-center">
+                    <h2 class="text-2xl font-medium md:text-3xl text-white">
+                        你想了解什么 AI 产品 / 用 AI 解决什么问题?
+                    </h2>
+                    <div class="relative max-w-3xl mx-auto">
+                        <input type="text" 
+                               class="h-12 pl-8 pr-12 text-lg w-full rounded-full border border-gray-700 bg-gray-900 text-white placeholder-gray-400" 
+                               placeholder="问问 sam">
+                        <button class="absolute right-2 top-1/2 -translate-y-1/2 p-2 hover:bg-gray-800 rounded-full text-gray-400">
+                            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+            <!-- 建议标签 -->
+            <div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto px-4 pb-20">
+                <button class="px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white">🤓 帮我介绍一下 Recraft</button>
+                <button class="px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white">🤔 我想制作视频课，应该怎么办？</button>
+                <button class="px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white">🤗 最近有哪些好玩的 AI 产品？</button>
+                <button class="px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white">✨ 我想生成一张圣诞节写真</button>
+                <button class="px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white">💡 我想试试最新的 AI 视频效果</button>
+                <button class="px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white">👀 随便看看</button>
+            </div>
+
+            <!-- 分类导航 -->
+            <div class="category-container relative">
+                <!-- 左滚动按钮 -->
+                <button class="scroll-button left">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+                
+                <!-- 分类按钮容器 -->
+            <body class="min-h-screen bg-black">
+                <div class="flex space-x-4 overflow-x-auto scrollbar-hide px-8">
+                    <!-- 分类按钮示例 -->
+                    <button class="category-button">
+                        <img src="/path/to/image1.jpg">
+                        <span>文本</span>
+                    </button>
+                    
+                    <button class="category-button selected">
+                        <img src="/path/to/image2.jpg">
+                        <span>图像</span>
+                    </button>
+                    
+                    <button class="category-button">
+                        <img src="/path/to/image3.jpg">
+                        <span>音频</span>
+                    </button>
+                    
+                    <button class="category-button">
+                        <img src="/path/to/image4.jpg">
+                        <span>视频</span>
+                    </button>
+                    
+                    <button class="category-button">
+                        <img src="/path/to/image4.jpg">
+                        <span>数字人</span>
+                    </button>
+
+                    <button class="category-button">
+                        <img src="/path/to/image4.jpg">
+                        <span>代码</span>
+                    </button>
+
+                    <button class="category-button">
+                        <img src="/path/to/image4.jpg">
+                        <span>行业应用</span>
+                    </button>
+ 
+                    <button class="category-button">
+                        <img src="/path/to/image4.jpg">
+                        <span>Agent</span>
+                    </button>
+                    <!-- 可以继续添加更多分类按钮 -->
+                </div>
+                
+            </div>
+
+            <!-- 特征标签 -->
+            <div class="relative min-h-80 flex items-center justify-center">
+                <div id="featureTags">
+                    <div class="feature-tag" style="left: 0%; top: 20%;">
+                        # 文生图 Text to Image
+                    </div>
+                    <div class="feature-tag" style="left: 40%; top: 10%;">
+                        # 控制主体 Subject Control
+                    </div>
+                    <div class="feature-tag" style="right: 10%; top: 20%;">
+                        # 图生图 Image to Image
+                    </div>
+                    <div class="feature-tag dark" style="left: 20%; top: 40%;">
+                        # 风格模仿 Style Imitation
+                    </div>
+                    <div class="feature-tag" style="left: 30%; top: 60%;">
+                        # 图像编辑 Image Editing
+                    </div>
+                    <div class="feature-tag" style="right: 30%; top: 50%;">
+                        # 提示词优化 Prompt Optimization
+                    </div>
+                    <div class="feature-tag dark" style="right: 20%; top: 70%;">
+                        # 风格迁移 Style Transfer
+                    </div>
+                    <div class="feature-tag" style="left: 40%; top: 80%;">
+                        # 定制风格 Custom Style
+                    </div>
+                </div>
+                <div class="overflow-hidden w-2/3 h-96 rounded-lg">
+                    <img src="images/abstract-patreperesent-classic-art.jpg" class="w-full h-auto object-cover"/>
+                </div>
+            </div>
+
+            <!-- 核心介绍 -->
+            <div class="space-y-4 text-center">
+                <p class="text-sm text-gray-400">覆盖四大核心领域：图像生成、编辑、理解及综合方案</p>
+                <p class="text-sm text-gray-400">精选功能卓越的模型和应用，满足多样使用场景</p>
+                <button class="px-6 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white">了解全部</button>
+
+            <!-- 工作流 -->
+            <div class="text-center pt-20">
+                <h2 class="text-2xl font-medium md:text-3xl text-white">
+                    大家在用 AI 产品解决什么问题?
+                </h2>
+            </div>
+                
+                <!-- 流程图部分 -->
+                <div class="flex justify-center items-center space-x-4 mb-8">
+                    <div class="flex items-center">
+                        <div class="flex items-center space-x-2">
+                            <div class="bg-gray-800 rounded-lg px-4 py-2 text-white">
+                                <span class="text-gray-400">产品名称</span><br/>
+                                prompt生成
+                            </div>
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="bg-gray-800 rounded-lg px-4 py-2 text-white">
+                                <span class="text-gray-400">产品名称</span><br/>
+                                圣诞风格照片生成
+                            </div>
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="bg-gray-800 rounded-lg px-4 py-2 text-white">
+                                <span class="text-gray-400">产品名称</span><br/>
+                                图像高清放大
+                            </div>
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </div>
+                        <div class="bg-gray-800 rounded-lg px-4 py-2 text-white">
+                            <span class="text-gray-400">产品名称</span><br/>
+                            AI 智能换脸
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 轮播卡片部分 -->
+                <div class="carousel-container relative h-80 overflow-hidden">
+                    <div class="carousel-track flex items-center justify-center" id="carouselTrack">
+                        <div class="carousel-card bg-white rounded-lg p-4 w-64 mx-4">
+                            <h3 class="font-medium mb-2">资讯分享</h3>
+                            <p class="text-sm text-gray-600">这里是一段文案这里是一段文案这里是一段文案</p>
+                        </div>
+                        <div class="carousel-card bg-white rounded-lg p-4 w-64 mx-4">
+                            <h3 class="font-medium mb-2">3d 立体图标生成</h3>
+                            <p class="text-sm text-gray-600">这里是一段文案这里是一段文案这里是一段文案</p>
+                        </div>
+                        <div class="carousel-card bg-black text-white rounded-lg p-4 w-64 mx-4">
+                            <h3 class="font-medium mb-2">拍立得风格圣诞写真</h3>
+                            <p class="text-sm">这里是一段文案这里是一段文案这里是一段文案</p>
+                        </div>
+                        <div class="carousel-card bg-white rounded-lg p-4 w-64 mx-4">
+                            <h3 class="font-medium mb-2">AI 视频课</h3>
+                            <p class="text-sm text-gray-600">这里是一段文案这里是一段文案这里是一段文案</p>
+                        </div>
+                        <div class="carousel-card bg-white rounded-lg p-4 w-64 mx-4">
+                            <h3 class="font-medium mb-2">mockup 快速制作</h3>
+                            <p class="text-sm text-gray-600">这里是一段文案这里是一段文案这里是一段文案</p>
+                        </div>
+                    </div>
+                    <div class="carousel-dots flex justify-center mt-4 space-x-2">
+                        <button class="w-2 h-2 rounded-full bg-gray-300"></button>
+                        <button class="w-2 h-2 rounded-full bg-gray-600"></button>
+                        <button class="w-2 h-2 rounded-full bg-gray-300"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
+<script src="script.js"></script>
 </html>
