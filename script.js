@@ -131,12 +131,29 @@ function initializeCarousel() {
     });
 }
 
+// 添加特征标签动画
+function initializeFeatureTags() {
+    const tags = document.querySelectorAll('.feature-tag');
+    
+    tags.forEach(tag => {
+        const duration = 8 + Math.random() * 4 + 's';
+        const delay = -Math.random() * 8 + 's';
+        
+        tag.style.setProperty('--duration', duration);
+        tag.style.animationDelay = delay;
+        
+        // 保持垂直位置
+        tag.dataset.originalTop = tag.style.top;
+    });
+}
+
 // 初始化
 document.addEventListener('DOMContentLoaded', () => {
     initializeCategories();
     initializeScroll();
     initializeHeaderEffect();
     initializeCarousel();
+    initializeFeatureTags();
 
     const categoryContainer = document.querySelector('.category-container');
     categoryContainer.addEventListener('mouseenter', () => isPaused = true);
