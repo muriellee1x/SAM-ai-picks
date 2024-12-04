@@ -173,3 +173,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// 在初始化分类按钮的部分添加以下代码
+function selectCategory(button) {
+    // 移除所有按钮的 active 状态和 shine 效果
+    document.querySelectorAll('.category-button').forEach(btn => {
+        btn.classList.remove('active');
+        btn.removeAttribute('data-shine-border');
+        // 移除可能存在的 shine-border 相关元素
+        const parent = btn.parentElement;
+        if (parent && parent.classList.contains('shine-border-gradient')) {
+            parent.replaceWith(btn);
+        }
+    });
+
+    // 添加新的 active 状态和 shine 效果
+    button.classList.add('active');
+    button.setAttribute('data-shine-border', '');
+    // 重新初始化当前按钮的 shine 效果
+    new ShineBorder(button);
+}
+
+// 为所有分类按钮添加点击事件
+document.querySelectorAll('.category-button').forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        selectCategory(button);
+    });
+});

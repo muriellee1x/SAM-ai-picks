@@ -6,6 +6,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>AI 产品精选</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="shine-border.js"></script>
 </head>
 <body class="min-h-screen bg-black">
     <!-- 固定顶部导航 -->
@@ -17,20 +18,20 @@
 
     <!-- 主要内容区域 -->
     <main class="relative">
-        <div class="max-w-8xl mx-auto px-4 pt-20 grid grid-cols-12 gap-8">
+        <div class="max-w-8xl mx-auto grid grid-cols-12 gap-8">
 
-            <!-- 主要内容 -->
-            <div class="col-start-3 col-span-8 space-y-6">
+            <!-- 第一部分 -->
+            <div class="h-screen col-start-3 col-span-8 space-y-6">
                 <!-- 搜索部分 -->
-                <div class="space-y-10 text-center">
+                <div class="pt-72 space-y-10 text-center">
                     <h2 class="text-2xl font-semibold md:text-3xl text-slate-200">
                         你想了解什么 AI 产品 / 用 AI 解决什么问题?
                     </h2>
                     <div class="relative">
                         <input type="text" 
-                               id="searchInput"
-                               class="h-12 pl-6 pr-12 text-lg w-full  bg-gray-900 text-white placeholder-gray-400" 
-                               placeholder="问问Sam">
+                            id="searchInput"
+                            class="h-12 pl-6 pr-12 text-lg w-full bg-gray-900 text-white placeholder-gray-400" 
+                            placeholder="问问Sam">
                         <button class="absolute right-2 top-1/2 -translate-y-1/2 p-2 hover:bg-gray-800 rounded-full text-gray-400">
                             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/>
@@ -39,108 +40,106 @@
                     </div>
                 </div>
 
-            <!-- 建议标签 -->
-            <div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto px-4 pb-20">
-                <button class="suggestion-tag px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white transition-all duration-200">🤓 帮我介绍一下 Recraft</button>
-                <button class="suggestion-tag px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white transition-all duration-200">🤔 我想制作视频课，应该怎么办？</button>
-                <button class="suggestion-tag px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white transition-all duration-200">🤗 最近有哪些好玩的 AI 产品？</button>
-                <button class="suggestion-tag px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white transition-all duration-200">✨ 我想生成一张圣诞节写真</button>
-                <button class="suggestion-tag px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white transition-all duration-200">💡 我想试试最新的 AI 视频效果</button>
-                <button class="suggestion-tag px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white transition-all duration-200">👀 随便看看</button>
+                <!-- 建议标签 -->
+                <div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto px-4 pb-20 pt-8">
+                    <button class="suggestion-tag px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white transition-all duration-200">🤓 帮我介绍一下 Recraft</button>
+                    <button class="suggestion-tag px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white transition-all duration-200">🤔 我想制作视频课，应该怎么办？</button>
+                    <button class="suggestion-tag px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white transition-all duration-200">🤗 最近有哪些好玩的 AI 产品？</button>
+                    <button class="suggestion-tag px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white transition-all duration-200">✨ 我想生成一张圣诞节写真</button>
+                    <button class="suggestion-tag px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white transition-all duration-200">💡 我想试试最新的 AI 视频效果</button>
+                    <button class="suggestion-tag px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white transition-all duration-200">👀 随便看看</button>
+                </div>
             </div>
 
-            <!-- 分类导航 -->
-            <div class="category-container relative">
-                <!-- 左滚动按钮 -->
-                <button class="scroll-button left">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                    </svg>
-                </button>
-                
-                <!-- 分类按钮容器 -->
-            <body class="min-h-screen bg-black">
-                <div class="flex space-x-4 overflow-x-auto scrollbar-hide px-8">
-                    <!-- 分类按钮示例 -->
-                    <a href="#" class="category-button bg-[url('/images/text-bg.jpg')]" target="_blank">
-                        <span>文本</span>
-                    </a>
-                    
-                    <a href="#" class="category-button bg-cover bg-[url('images/image-bg.png')]" target="_blank">
-                        <span>图像</span>
-                    </a>
-                    
-                    <a href="#" class="category-button bg-cover bg-[url('/images/audio-bg.jpg')]" target="_blank">
-                        <span>音频</span>
-                    </a>
-                    
-                    <a href="#" class="category-button bg-cover bg-[url('/images/video-bg.jpg')]" target="_blank">
-                        <span>视频</span>
-                    </a>
-                    
-                    <a href="#" class="category-button bg-cover bg-[url('/images/avatar-bg.jpg')]" target="_blank">
-                        <span>数字人</span>
-                    </a>
+            <!-- 第二部分 -->
+            <div class="h-screen col-start-3 col-span-8 space-y-6">
 
-                    <!-- <a href="#" class="category-button bg-cover bg-[url('/images/code-bg.jpg')]" target="_blank">
-                        <span>代码</span>
-                    </a> -->
+                <h2 class="text-2xl text-center pt-10 font-medium md:text-3xl text-slate-200">
+                    当前有哪些最新 AI 能力？
+                </h2>
 
-                    <a href="#" class="category-button bg-cover bg-[url('/images/industry-bg.jpg')]" target="_blank">
-                        <span>行业应用</span>
-                    </a>
+                <div class="category-container relative">   
+                    <!-- 分类按钮容器 -->
+                    <div class="flex justify-center items-center space-x-4 overflow-x-auto scrollbar-hide py-2">
+                        <!-- 分类按钮示例 -->
+                        <a href="#" class="category-button">
+                            <span>文本</span>
+                        </a>
+                        
+                        <a href="#" class="category-button active">
+                            <span>图像</span>
+                        </a>
+                        
+                        <a href="#" class="category-button">
+                            <span>音频</span>
+                        </a>
+                        
+                        <a href="#" class="category-button">
+                            <span>视频</span>
+                        </a>
+                        
+                        <a href="#" class="category-button">
+                            <span>数字人</span>
+                        </a>
 
-                    <a href="#" class="category-button bg-cover bg-[url('/images/agent-bg.jpg')]" target="_blank">
-                        <span>Agent</span>
+                        <a href="#" class="category-button">
+                            <span>行业应用</span>
+                        </a>
+
+                        <a href="#" class="category-button">
+                            <span>Agent</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 核心介绍 -->
+                <div class="space-y-4 text-center">
+                    <p class="text-base text-slate-400 tracking-wider leading-7">
+                        涵盖四大核心领域：<span class="font-medium text-slate-200">图像生成、编辑、理解及综合方案</span>
+                        <br>
+                        精选功能卓越的模型和应用，满足多样使用场景
+                    </p>
+                </div>
+
+                <!-- 特征标签 -->
+                <div id="featureTagsContainer" class="relative flex items-center justify-center overflow-hidden py-2">
+                    <div id="feature-tag-image-container" class="overflow-hidden w-2/3 h-80 rounded-lg hover:scale-[1.02]">
+                        <img src="images/abstract-patreperesent-classic-art.jpg" class="w-full h-auto object-cover hover:scale-[1.02] transition-all duration-500"/>
+                    </div>
+                    <div id="feature-tags-container" class="absolute w-full h-full pointer-events-none">
+                        <a href="https://km.sankuai.com/collabpage/2563917399#b-a3e19cc569f04943b6bb259d6d5b4d84" class="feature-tag" style="left: 0%; top: 10%;" target="_blank">
+                            # 文生图 Text to Image
+                        </a>
+                        <a href="https://km.sankuai.com/collabpage/2563917399#b-448213376fac45608f46436abe7de4e2" class="feature-tag" style="left: 15%; top: 30%;" target="_blank">
+                            # 图生图 Image to Image
+                        </a>
+                        <a href="https://km.sankuai.com/collabpage/2563917399#b-dfcbc07a79aa45758db97697d983cd84" class="feature-tag" style="right: 10%; top: 40%;" target="_blank">
+                            # 线稿生图 Sketch to Image
+                        </a>
+                        <a href="https://km.sankuai.com/collabpage/2563917399#b-dfe6ef5875ce41b8b71cf09308910bdb" class="feature-tag" style="right: 0%; top: 60%;" target="_blank">
+                            # 空间对齐 Spatial Align
+                        </a>
+                        <a href="https://km.sankuai.com/collabpage/2563917399#b-f98aa3ac92594de6a43db85d80a63c3f" class="feature-tag dark" style="left: 5%; top: 60%;" target="_blank">
+                            # 风格模仿 Style Imitation
+                        </a>
+                        <a href="https://km.sankuai.com/collabpage/2563917399#b-8925285f3eb443cd82ed31e03dc41955" class="feature-tag" style="left: 30%; top: 70%;" target="_blank">
+                            # 图像生成社区 Image Generation Community
+                        </a>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-center">
+                    <a href="https://km.sankuai.com/collabpage/2563917399" class="inline-block pt-2" target="_blank">
+                        <button class="px-10 py-2 rounded-full font-medium text-slate-200">了解全部</button>
                     </a>
                 </div>
             </div>
 
-            <!-- 核心介绍 -->
-            <div class="space-y-4 text-center">
-                <p class="text-base text-gray-400 tracking-wider leading-7">
-                    涵盖四大核心领域：<span class="font-medium text-blue-600">图像生成、编辑、理解及综合方案</span>
-                    <br>
-                    精选功能卓越的模型和应用，满足多样使用场景
-                </p>
-            </div>
+            <!-- 第三部分 -->
+            <div class="h-screen col-start-3 col-span-8 sp
+            ace-y-6">
 
-            <!-- 特征标签 -->
-            <div id="featureTagsContainer" class="relative flex items-center justify-center overflow-hidden">
-                <div id="feature-tag-image-container" class="overflow-hidden w-2/3 h-80 rounded-lg">
-                    <img src="images/abstract-patreperesent-classic-art.jpg" class="w-full h-auto object-cover"/>
-                </div>
-                <div id="feature-tags-container" class="absolute w-full h-full pointer-events-none">
-                    <a href="https://km.sankuai.com/collabpage/2563917399#b-a3e19cc569f04943b6bb259d6d5b4d84" class="feature-tag" style="left: 0%; top: 10%;" target="_blank">
-                        # 文生图 Text to Image
-                    </a>
-                    <a href="https://km.sankuai.com/collabpage/2563917399#b-448213376fac45608f46436abe7de4e2" class="feature-tag" style="left: 15%; top: 30%;" target="_blank">
-                        # 图生图 Image to Image
-                    </a>
-                    <a href="https://km.sankuai.com/collabpage/2563917399#b-dfcbc07a79aa45758db97697d983cd84" class="feature-tag" style="right: 10%; top: 40%;" target="_blank">
-                        # 线稿生图 Sketch to Image
-                    </a>
-                    <a href="https://km.sankuai.com/collabpage/2563917399#b-dfe6ef5875ce41b8b71cf09308910bdb" class="feature-tag" style="right: 0%; top: 60%;" target="_blank">
-                        # 空间对齐 Spatial Align
-                    </a>
-                    <a href="https://km.sankuai.com/collabpage/2563917399#b-f98aa3ac92594de6a43db85d80a63c3f" class="feature-tag dark" style="left: 5%; top: 60%;" target="_blank">
-                        # 风格模仿 Style Imitation
-                    </a>
-                    <a href="https://km.sankuai.com/collabpage/2563917399#b-8925285f3eb443cd82ed31e03dc41955" class="feature-tag" style="left: 30%; top: 70%;" target="_blank">
-                        # 图像生成社区 Image Generation Community
-                    </a>
-                </div>
-            </div>
-
-            <div class="space-y-4 text-center">
-                <a href="https://km.sankuai.com/collabpage/2563917399" class="inline-block pt-2" target="_blank">
-                    <button class="px-10 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white">了解全部</button>
-                </a>
-            </div>
-
-            <!-- 工作流 -->
-            <div class="text-center pt-20">
-                <h2 class="text-2xl font-medium md:text-3xl text-white">
+                <h2 class="text-2xl text-slate-200 pt-40 text-center font-medium md:text-3xl text-slate-200">
                     大家在用 AI 产品解决什么问题?
                 </h2>
                 
@@ -167,6 +166,7 @@
                         </button>
                     </div>
                 </div>
+
             </div>
         </div>
     </main>
@@ -182,6 +182,11 @@
       componentProps: {
         title: 'Coze',
       },
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        initShineBorders();
     });
 </script>
 </html>

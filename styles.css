@@ -7,6 +7,13 @@
     display: none;
 }
 
+.suggestion-tag.active {
+    background-color: rgb(37 99 235); /* blue-600 */
+    border-color: rgb(37 99 235);
+    transform: scale(1.05);
+}
+
+
 .category-container {
     position: relative;
 }
@@ -15,23 +22,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.75rem 1.5rem;
+    padding: 0.5rem 1.5rem;
     color: white;
-    border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s;
-    background-color: rgba(55,65,81,0.5);
-    min-width: 120px;
-    height:60px;
+    background-color: transparent;
     white-space: nowrap;
     overflow: hidden;
+    border-width: 1px;
+    border-color: rgb(75 85 101);
+    border-radius: 9999px;
 }
 
 
 .category-button:hover {
-    /* background: rgba(55, 65, 81, 0.3); */
-    transform: translateY(-1px);
-    filter:brightness(1.1);
+    background: rgba(55, 65, 81, 0.5);
+}
+
+.category-button.active {
+    position: relative;
+    background-clip: padding-box;
+    border: 1px solid transparent;
+    background: 
+        linear-gradient(black, black) padding-box,
+        linear-gradient(90deg, #ff00aa, #ad56ff, #00bfff) border-box;
+    box-shadow: 0px 0px 4px white;
+    transition: all 1s ease;
+    animation: shadowGlow 5s ease-in-out infinite;
 }
 
 
@@ -191,82 +208,61 @@
     overflow: hidden;
     transition: transform 0.3s ease-out;
     will-change: transform;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    box-shadow: 
-        0 5px 15px rgba(0, 0, 0, 0.2),
-        0 0 30px rgba(0, 0, 0, 0.1),
-        inset 0 0 1px rgba(255, 255, 255, 0.2);
+    border: 1px solid transparent;
+    background: 
+        linear-gradient(black, black) padding-box,
+        linear-gradient(90deg, #ff00aa, #2de6ff, #ad56ff, #00bfff) border-box;
+    box-shadow: 0px 0px 12px white;
+    transition: all 1s ease;
+    animation: shadowGlow 5s ease-in-out infinite;
+    
 }
-
-#feature-tag-image-container::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        125deg,
-        rgba(255, 255, 255, 0.3) 0%,
-        rgba(255, 255, 255, 0.1) 30%,
-        transparent 60%
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-}
-
-#feature-tag-image-container:hover::after {
-    opacity: 1;
-}
-
-#feature-tag-image-container.tilting {
-    transition: none;
-}
-
 
 @keyframes shadowGlow {
     0% {
-        box-shadow: 0 0 4px #3acbff;
+        box-shadow: 0 0 4px #ff00aa; /* 亮粉 */
     }
-    50% {
-        box-shadow: 0 0 4px #6b2cff;
+    33% {
+        box-shadow: 0 0 4px #2de6ff; /* 荧光绿 */
+    }
+    66% {
+        box-shadow: 0 0 4px #ad56ff; /* 荧光紫 */
     }
     100% {
-        box-shadow: 0 0 4px #0d00fe;
+        box-shadow: 0 0 4px #00bfff; /* 亮蓝 */
     }
 }
 
 @keyframes shadowGlowFocus {
     0% {
-        box-shadow: 0 0 8px #3acbff;
+        box-shadow: 0 0 12px #ff00aa; /* 亮粉 */
     }
-    50% {
-        box-shadow: 0 0 8px #6b2cff;
+    33% {
+        box-shadow: 0 0 12px #2de6ff; /* 荧光绿 */
+    }
+    66% {
+        box-shadow: 0 0 12px #ad56ff; /* 荧光紫 */
     }
     100% {
-        box-shadow: 0 0 8px #0d00fe;
+        box-shadow: 0 0 12px #00bfff; /* 亮蓝 */
     }
 }
 
 input[type="text"] {
     background-clip: padding-box;
-    /* border: 2px solid transparent; */
-    border-image-slice: 1;
-    border-image-source: linear-gradient(90deg, #3acbff, #6b2cff, #0d00fe, #000000);
-    box-shadow: 0 0 4px #6b2cff;
+    border: 1px solid transparent;
+    border-radius: 9999px;
+    background: 
+        linear-gradient(black, black) padding-box,
+        linear-gradient(90deg, #ff00aa, #2de6ff, #ad56ff, #00bfff) border-box;
+    box-shadow: 0px 0px 4px white;
     transition: all 0.3s ease;
-    border-radius: 9999px; 
     animation: shadowGlow 5s ease-in-out infinite;
 }
 
 input[type="text"]:focus {
     outline: none;
-    box-shadow: 0 0 8px #6b2cff;
-    border-image-source: linear-gradient(45deg, #3acbff, #6b2cff, #0d00fe, #000000);
+    box-shadow: 0px 0px 12px white;
+    border-image-source: linear-gradient(45deg, #ff00aa, #2de6ff, #ad56ff, #00bfff); /* 亮粉、荧光绿、荧光紫、亮蓝 */
     animation: shadowGlowFocus 5s ease-in-out infinite;
-}
-
-.suggestion-tag.active {
-    background-color: rgb(37 99 235); /* blue-600 */
-    border-color: rgb(37 99 235);
-    transform: scale(1.05);
 }
