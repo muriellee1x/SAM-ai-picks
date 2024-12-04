@@ -14,37 +14,46 @@
 .category-button {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 0.75rem 1.5rem;
-    color:white;
-    border: 1px solid rgb(55 65 81);
-    border-radius: 9999px;
+    color: white;
+    /* border: 1px solid rgb(55 65 81); */
+    border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s;
-    background: transparent;
-    min-width: 160px;
+    background-color: rgba(55,65,81,0.5);
+    min-width: 120px;
+    height:60px;
     white-space: nowrap;
+    overflow: hidden;
 }
 
 .category-button.selected {
-    background: rgb(55 65 81);
+    /* background: rgb(55 65 81); */
     color: white;
-    border: 1px solid white;
+    border: 1px solid rgb(156 163 175);
+    box-shadow: 0 0 10px rgba(156, 163, 175, 0.3);
 }
 
-.category-button img {
+.category-button:hover {
+    background: rgba(55, 65, 81, 0.3);
+    transform: translateY(-1px);
+}
+
+/* .category-button img {
     width: 32px;
     height: 32px;
     border-radius: 50%;
     margin-right: 1rem;
     object-fit: cover;
     flex-shrink: 0;
-}
+} */
 
-.category-button span {
+/* .category-button span {
     font-size: 1rem;
     line-height: 1.5;
     color: white;
-}
+} */
 
 .feature-tag {
     position: absolute;
@@ -58,15 +67,15 @@
     white-space: nowrap;
     cursor: pointer;
     backdrop-filter: blur(8px);
-    pointer-events: auto; 
+    pointer-events: auto;
     will-change: transform;
-    transition: transform 0.3s ease;
     animation: moveTag 20s linear infinite;
     animation-delay: calc(var(--delay, 0) * 1s);
+    transition: all 0.3s ease;
 }
 
 .feature-tag:hover {
-    transform: translateY(-2px) scale(1.05);
+    transform: scale(1.05);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     background: rgba(55,65,81,0.5);
     animation-play-state: paused;
@@ -97,17 +106,54 @@
 
 .carousel-card {
     position: absolute;
-    width: 250px;
-    height: 150px;
-    transition: all 0.5s ease-out;
+    width: 300px;
+    transition: all 0.5s ease-in-out;
+    background: white;
     border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-.carousel-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+.carousel-card.dark {
+    background: black;
+    color: white;
+}
+
+.carousel-card img {
+    width: 100%;
+    height: 192px;
+    object-fit: cover;
+}
+
+.carousel-card .content {
+    padding: 1rem;
+}
+
+.carousel-card h3 {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.carousel-card p {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.carousel-card.dark p {
+    color: #999;
+}
+
+.carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s;
+}
+
+.carousel-dot.active {
+    width: 16px;
+    background: white;
 }
 
 /* 轮播点样式 */
@@ -138,6 +184,116 @@
 }
 
 #featureTagsContainer {
-    mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    position: relative;
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 20%,
+        black 80%,
+        transparent
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 20%,
+        black 80%,
+        transparent
+    );
+    width: 100%;
+    padding: 20px;
+}
+
+.feature-tags-container {
+    position: relative;
+    min-height: 400px;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+#feature-tag-image-container {
+    transform-style: preserve-3d;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease-out;
+    will-change: transform;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.2),
+        0 0 30px rgba(0, 0, 0, 0.1),
+        inset 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+#feature-tag-image-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        125deg,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0.1) 30%,
+        transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+#feature-tag-image-container:hover::after {
+    opacity: 1;
+}
+
+#feature-tag-image-container.tilting {
+    transition: none;
+}
+
+
+@keyframes shadowGlow {
+    0% {
+        box-shadow: 0 0 4px #3acbff;
+    }
+    50% {
+        box-shadow: 0 0 4px #6b2cff;
+    }
+    100% {
+        box-shadow: 0 0 4px #0d00fe;
+    }
+}
+
+@keyframes shadowGlowFocus {
+    0% {
+        box-shadow: 0 0 8px #3acbff;
+    }
+    50% {
+        box-shadow: 0 0 8px #6b2cff;
+    }
+    100% {
+        box-shadow: 0 0 8px #0d00fe;
+    }
+}
+
+input[type="text"] {
+    background-clip: padding-box;
+    /* border: 2px solid transparent; */
+    border-image-slice: 1;
+    border-image-source: linear-gradient(90deg, #3acbff, #6b2cff, #0d00fe, #000000);
+    box-shadow: 0 0 4px #6b2cff;
+    transition: all 0.3s ease;
+    border-radius: 9999px; 
+    animation: shadowGlow 5s ease-in-out infinite;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    box-shadow: 0 0 8px #6b2cff;
+    border-image-source: linear-gradient(45deg, #3acbff, #6b2cff, #0d00fe, #000000);
+    animation: shadowGlowFocus 5s ease-in-out infinite;
+}
+
+.suggestion-tag.active {
+    background-color: rgb(37 99 235); /* blue-600 */
+    border-color: rgb(37 99 235);
+    transform: scale(1.05);
 }
