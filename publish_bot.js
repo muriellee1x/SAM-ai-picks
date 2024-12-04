@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const API_TOKEN = 'pat_ewn7BZ9gjeCxjpufsqsxCKlEvYdLOTi9w3ZHOgNXmituSw8AshZhhhYWii1rAQtH';
-const BOT_ID = '7442161757059235878';
+const BOT_ID = '7444006377292529715';
 
 async function publishBot() {
     try {
