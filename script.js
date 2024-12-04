@@ -47,6 +47,7 @@ function selectCategory(index) {
     buttons[index].classList.remove('selected');
     selectedIndex = index;
     buttons[selectedIndex].classList.add('selected');
+
     buttons[selectedIndex].scrollIntoView({
         behavior: 'smooth',
         block: 'nearest',

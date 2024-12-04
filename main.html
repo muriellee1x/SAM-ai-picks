@@ -20,7 +20,7 @@
         <div class="max-w-8xl mx-auto px-4 pt-20 grid grid-cols-12 gap-8">
 
             <!-- 主要内容 -->
-            <div class="col-start-3 col-span-8 space-y-10">
+            <div class="col-start-3 col-span-8 space-y-6">
                 <!-- 搜索部分 -->
                 <div class="space-y-10 text-center">
                     <h2 class="text-2xl font-semibold md:text-3xl text-slate-200">
@@ -62,83 +62,81 @@
             <body class="min-h-screen bg-black">
                 <div class="flex space-x-4 overflow-x-auto scrollbar-hide px-8">
                     <!-- 分类按钮示例 -->
-                    <button class="category-button bg-[url('/images/text-bg.jpg')]">
+                    <a href="#" class="category-button bg-[url('/images/text-bg.jpg')]" target="_blank">
                         <span>文本</span>
-                    </button>
+                    </a>
                     
-                    <button class="category-button bg-[url('images/image-bg.png')]">
+                    <a href="#" class="category-button bg-cover bg-[url('images/image-bg.png')]" target="_blank">
                         <span>图像</span>
-                    </button>
+                    </a>
                     
-                    <button class="category-button bg-[url('/images/audio-bg.jpg')]">
+                    <a href="#" class="category-button bg-cover bg-[url('/images/audio-bg.jpg')]" target="_blank">
                         <span>音频</span>
-                    </button>
+                    </a>
                     
-                    <button class="category-button bg-[url('/images/video-bg.jpg')]">
+                    <a href="#" class="category-button bg-cover bg-[url('/images/video-bg.jpg')]" target="_blank">
                         <span>视频</span>
-                    </button>
+                    </a>
                     
-                    <button class="category-button bg-[url('/images/avatar-bg.jpg')]">
+                    <a href="#" class="category-button bg-cover bg-[url('/images/avatar-bg.jpg')]" target="_blank">
                         <span>数字人</span>
-                    </button>
+                    </a>
 
-                    <button class="category-button bg-[url('/images/code-bg.jpg')]">
+                    <!-- <a href="#" class="category-button bg-cover bg-[url('/images/code-bg.jpg')]" target="_blank">
                         <span>代码</span>
-                    </button>
+                    </a> -->
 
-                    <button class="category-button bg-[url('/images/industry-bg.jpg')]">
+                    <a href="#" class="category-button bg-cover bg-[url('/images/industry-bg.jpg')]" target="_blank">
                         <span>行业应用</span>
-                    </button>
+                    </a>
 
-                    <button class="category-button bg-[url('/images/agent-bg.jpg')]">
+                    <a href="#" class="category-button bg-cover bg-[url('/images/agent-bg.jpg')]" target="_blank">
                         <span>Agent</span>
-                    </button>
-                    <!-- 可以继续添加更多分类按钮 -->
-                </div>
-                
-            </div>
-
-            <!-- 特征标签 -->
-            <div id="featureTagsContainer" class="relative min-h-80 flex items-center justify-center overflow-hidden">
-                <div id="feature-tag-image-container" class="overflow-hidden w-2/3 h-96 rounded-lg">
-                    <img src="images/abstract-patreperesent-classic-art.jpg" class="w-full h-auto object-cover"/>
-                </div>
-                <div id="feature-tags-container" class="absolute w-full h-full pointer-events-none">
-                    <div class="feature-tag" style="left: 0%; top: 20%;">
-                        # 文生图 Text to Image
-                    </div>
-                    <div class="feature-tag" style="left: 40%; top: 10%;">
-                        # 控制主体 Subject Control
-                    </div>
-                    <div class="feature-tag" style="right: 10%; top: 20%;">
-                        # 图生图 Image to Image
-                    </div>
-                    <div class="feature-tag dark" style="left: 20%; top: 40%;">
-                        # 风格模仿 Style Imitation
-                    </div>
-                    <div class="feature-tag" style="left: 30%; top: 60%;">
-                        # 图像编辑 Image Editing
-                    </div>
-                    <div class="feature-tag" style="right: 30%; top: 50%;">
-                        # 提示词优化 Prompt Optimization
-                    </div>
-                    <div class="feature-tag dark" style="right: 20%; top: 70%;">
-                        # 风格迁移 Style Transfer
-                    </div>
-                    <div class="feature-tag" style="left: 40%; top: 80%;">
-                        # 定制风格 Custom Style
-                    </div>
+                    </a>
                 </div>
             </div>
 
             <!-- 核心介绍 -->
             <div class="space-y-4 text-center">
-                <p class="text-sm text-gray-400 tracking-wider leading-7">
+                <p class="text-base text-gray-400 tracking-wider leading-7">
                     涵盖四大核心领域：<span class="font-medium text-blue-600">图像生成、编辑、理解及综合方案</span>
                     <br>
                     精选功能卓越的模型和应用，满足多样使用场景
                 </p>
-                <button class="px-10 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white">了解全部</button>
+            </div>
+
+            <!-- 特征标签 -->
+            <div id="featureTagsContainer" class="relative flex items-center justify-center overflow-hidden">
+                <div id="feature-tag-image-container" class="overflow-hidden w-2/3 h-80 rounded-lg">
+                    <img src="images/abstract-patreperesent-classic-art.jpg" class="w-full h-auto object-cover"/>
+                </div>
+                <div id="feature-tags-container" class="absolute w-full h-full pointer-events-none">
+                    <a href="https://km.sankuai.com/collabpage/2563917399#b-a3e19cc569f04943b6bb259d6d5b4d84" class="feature-tag" style="left: 0%; top: 10%;" target="_blank">
+                        # 文生图 Text to Image
+                    </a>
+                    <a href="https://km.sankuai.com/collabpage/2563917399#b-448213376fac45608f46436abe7de4e2" class="feature-tag" style="left: 15%; top: 30%;" target="_blank">
+                        # 图生图 Image to Image
+                    </a>
+                    <a href="https://km.sankuai.com/collabpage/2563917399#b-dfcbc07a79aa45758db97697d983cd84" class="feature-tag" style="right: 10%; top: 40%;" target="_blank">
+                        # 线稿生图 Sketch to Image
+                    </a>
+                    <a href="https://km.sankuai.com/collabpage/2563917399#b-dfe6ef5875ce41b8b71cf09308910bdb" class="feature-tag" style="right: 0%; top: 60%;" target="_blank">
+                        # 空间对齐 Spatial Align
+                    </a>
+                    <a href="https://km.sankuai.com/collabpage/2563917399#b-f98aa3ac92594de6a43db85d80a63c3f" class="feature-tag dark" style="left: 5%; top: 60%;" target="_blank">
+                        # 风格模仿 Style Imitation
+                    </a>
+                    <a href="https://km.sankuai.com/collabpage/2563917399#b-8925285f3eb443cd82ed31e03dc41955" class="feature-tag" style="left: 30%; top: 70%;" target="_blank">
+                        # 图像生成社区 Image Generation Community
+                    </a>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-center">
+                <a href="https://km.sankuai.com/collabpage/2563917399" class="inline-block pt-2" target="_blank">
+                    <button class="px-10 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white">了解全部</button>
+                </a>
+            </div>
 
             <!-- 工作流 -->
             <div class="text-center pt-20">
