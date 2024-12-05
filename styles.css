@@ -205,6 +205,7 @@
 #feature-tag-image-container {
     transform-style: preserve-3d;
     overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 #feature-tag-image-container:hover{
