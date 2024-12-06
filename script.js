@@ -3,201 +3,108 @@ let carouselInterval;
 let isPaused = false;
 
 
+// document.addEventListener('DOMContentLoaded', function() {
+//     // 获取搜索输入框
+//     const searchInput = document.getElementById('searchInput');
+    
+//     // 获取所有建议标签按钮
+//     const suggestionButtons = document.querySelectorAll('.flex.flex-wrap.justify-center.gap-4 button');
+    
+//     // 为每个按钮添加点击事件监听器
+//     suggestionButtons.forEach(button => {
+//         button.addEventListener('click', function() {
+//             // 更新正则表达式以匹配更多的特殊字符和表情符号
+//             const buttonText = this.textContent
+//                 .replace(/[\u{1F300}-\u{1F9FF}\u{2700}-\u{27BF}\u{2600}-\u{26FF}]/gu, '')
+//                 .trim();
+//             // 设置输入框的值
+//             searchInput.value = buttonText;
+//             // 让输入框获得焦点
+//             searchInput.focus();
+//         });
+//     });
+// });
+
+// // 初始化分类按钮
+// function initializeCategories() {
+//     const container = document.getElementById('categoryScroll');
+//     categories.forEach((category, index) => {
+//         const button = document.createElement('button');
+//         button.className = `category-button ${index === 0 ? 'selected' : ''}`;
+//         button.innerHTML = `
+//             <img src="${category.image}" alt="">
+//             <span>${category.name}</span>
+//         `;
+//         button.onclick = () => selectCategory(index);
+//         container.appendChild(button);
+//     });
+// }
+
+// // 选择分类
+// function selectCategory(index) {
+//     const buttons = document.querySelectorAll('.category-button');
+//     buttons[selectedIndex].classList.remove('selected');
+//     buttons[index].classList.remove('selected');
+//     selectedIndex = index;
+//     buttons[selectedIndex].classList.add('selected');
+
+//     buttons[selectedIndex].scrollIntoView({
+//         behavior: 'smooth',
+//         block: 'nearest',
+//         inline: 'center'
+//     });
+// }
+
+// // 在初始化分类按钮的部分添加以下代码
+// function selectCategory(button) {
+//     // 移除所有按钮的 active 状态和 shine 效果
+//     document.querySelectorAll('.category-button').forEach(btn => {
+//         btn.classList.remove('active');
+//         btn.removeAttribute('data-shine-border');
+//         // 移除可能存在的 shine-border 相关元素
+//         const parent = btn.parentElement;
+//         if (parent && parent.classList.contains('shine-border-gradient')) {
+//             parent.replaceWith(btn);
+//         }
+//     });
+
+//     // 添加新的 active 状态和 shine 效果
+//     button.classList.add('active');
+//     button.setAttribute('data-shine-border', '');
+//     // 重新初始化当前按钮的 shine 效果
+//     new ShineBorder(button);
+// }
+
+// // 为所有分类按钮添加点击事件
+// document.querySelectorAll('.category-button').forEach(button => {
+//     button.addEventListener('click', (e) => {
+//         e.preventDefault();
+//         selectCategory(button);
+//     });
+// });
+
+// 轮播相关代码
 document.addEventListener('DOMContentLoaded', function() {
-    // 获取搜索输入框
-    const searchInput = document.getElementById('searchInput');
-    
-    // 获取所有建议标签按钮
-    const suggestionButtons = document.querySelectorAll('.flex.flex-wrap.justify-center.gap-4 button');
-    
-    // 为每个按钮添加点击事件监听器
-    suggestionButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // 更新正则表达式以匹配更多的特殊字符和表情符号
-            const buttonText = this.textContent
-                .replace(/[\u{1F300}-\u{1F9FF}\u{2700}-\u{27BF}\u{2600}-\u{26FF}]/gu, '')
-                .trim();
-            // 设置输入框的值
-            searchInput.value = buttonText;
-            // 让输入框获得焦点
-            searchInput.focus();
-        });
-    });
-});
+    const carouselItems = document.querySelectorAll('.carousel-item');
+    const moveLeftBtn = document.querySelector('#moveLeft');
+    const moveRightBtn = document.querySelector('#moveRight');
+    let currentItem = 0;
 
-// 初始化分类按钮
-function initializeCategories() {
-    const container = document.getElementById('categoryScroll');
-    categories.forEach((category, index) => {
-        const button = document.createElement('button');
-        button.className = `category-button ${index === 0 ? 'selected' : ''}`;
-        button.innerHTML = `
-            <img src="${category.image}" alt="">
-            <span>${category.name}</span>
-        `;
-        button.onclick = () => selectCategory(index);
-        container.appendChild(button);
-    });
-}
+    // 初始化第一个item为active
+    carouselItems[0].classList.add('active');
 
-// 选择分类
-function selectCategory(index) {
-    const buttons = document.querySelectorAll('.category-button');
-    buttons[selectedIndex].classList.remove('selected');
-    buttons[index].classList.remove('selected');
-    selectedIndex = index;
-    buttons[selectedIndex].classList.add('selected');
-
-    buttons[selectedIndex].scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center'
-    });
-}
-
-// 滚动控制
-function initializeScroll() {
-    const container = document.getElementById('categoryScroll');
-    const leftButton = document.getElementById('scrollLeft');
-    const rightButton = document.getElementById('scrollRight');
-
-    function checkScroll() {
-        const { scrollLeft, scrollWidth, clientWidth } = container;
-        leftButton.style.display = scrollLeft > 0 ? 'flex' : 'none';
-        rightButton.style.display = scrollLeft < scrollWidth - clientWidth - 1 ? 'flex' : 'none';
+    function moveLeft() {
+        carouselItems[currentItem].classList.remove('active');
+        currentItem = (currentItem - 1 + carouselItems.length) % carouselItems.length;
+        carouselItems[currentItem].classList.add('active');
     }
 
-    container.addEventListener('scroll', checkScroll);
-    checkScroll();
+    function moveRight() {
+        carouselItems[currentItem].classList.remove('active');
+        currentItem = (currentItem + 1) % carouselItems.length;
+        carouselItems[currentItem].classList.add('active');
+    }
 
-    leftButton.onclick = () => {
-        container.scrollBy({ left: -200, behavior: 'smooth' });
-    };
-
-    rightButton.onclick = () => {
-        container.scrollBy({ left: 200, behavior: 'smooth' });
-    };
-}
-
-// Header scroll effect
-function initializeHeaderEffect() {
-    const header = document.getElementById('header');
-    let lastScrollY = window.scrollY;
-
-    window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
-        
-        // 向下滚动时增加不透明度
-        if (currentScrollY > lastScrollY) {
-            header.querySelector('.container').classList.remove('bg-black/50');
-            header.querySelector('.container').classList.add('bg-black/80');
-        } 
-        // 向上滚动或回到顶部时恢复原来的透明度
-        else {
-            header.querySelector('.container').classList.remove('bg-black/80');
-            header.querySelector('.container').classList.add('bg-black/50');
-        }
-        
-        lastScrollY = currentScrollY;
-    });
-}
-
-// 添加图片3D效果处理函数
-function initializeImagePerspective() {
-    const container = document.getElementById('featureTagsContainer');
-    const card = document.getElementById('feature-tag-image-container');
-    
-    const handleMouseMove = (e) => {
-        const rect = container.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const maxRotation = 15;
-        
-        const rotateY = ((x - centerX) / centerX) * maxRotation;
-        const rotateX = -((y - centerY) / centerY) * maxRotation;
-        
-        card.classList.add('tilting');
-        
-        card.style.transform = `
-            perspective(1000px)
-            rotateX(${rotateX}deg)
-            rotateY(${rotateY}deg)
-            scale3d(1.05, 1.05, 1.05)
-        `;
-    };
-    
-    const handleMouseLeave = () => {
-        card.classList.remove('tilting');
-        card.style.transform = `
-            perspective(1000px)
-            rotateX(0deg)
-            rotateY(0deg)
-            scale3d(1, 1, 1)
-        `;
-    };
-    
-    const handleMouseEnter = () => {
-        card.classList.add('tilting');
-    };
-
-    container.addEventListener('mousemove', handleMouseMove);
-    container.addEventListener('mouseleave', handleMouseLeave);
-    container.addEventListener('mouseenter', handleMouseEnter);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('searchInput');
-    const tags = document.querySelectorAll('.suggestion-tag');
-    
-    tags.forEach(tag => {
-        tag.addEventListener('click', () => {
-            // 移除其他标签的选中状态
-            tags.forEach(t => t.classList.remove('active'));
-            // 为当前点击的标签添加选中状态
-            tag.classList.add('active');
-            
-            // 使用相同的表情符号清理逻辑
-            const cleanText = tag.textContent
-                .replace(/[\u{1F300}-\u{1F9FF}\u{2700}-\u{27BF}\u{2600}-\u{26FF}]/gu, '')
-                .trim();
-                
-            // 更新搜索框内容
-            if (searchInput) {
-                searchInput.value = cleanText;
-                searchInput.focus();
-            }
-        });
-    });
-});
-
-// 在初始化分类按钮的部分添加以下代码
-function selectCategory(button) {
-    // 移除所有按钮的 active 状态和 shine 效果
-    document.querySelectorAll('.category-button').forEach(btn => {
-        btn.classList.remove('active');
-        btn.removeAttribute('data-shine-border');
-        // 移除可能存在的 shine-border 相关元素
-        const parent = btn.parentElement;
-        if (parent && parent.classList.contains('shine-border-gradient')) {
-            parent.replaceWith(btn);
-        }
-    });
-
-    // 添加新的 active 状态和 shine 效果
-    button.classList.add('active');
-    button.setAttribute('data-shine-border', '');
-    // 重新初始化当前按钮的 shine 效果
-    new ShineBorder(button);
-}
-
-// 为所有分类按钮添加点击事件
-document.querySelectorAll('.category-button').forEach(button => {
-    button.addEventListener('click', (e) => {
-        e.preventDefault();
-        selectCategory(button);
-    });
+    moveLeftBtn.addEventListener('click', moveLeft);
+    moveRightBtn.addEventListener('click', moveRight);
 });
