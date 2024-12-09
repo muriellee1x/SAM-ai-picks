@@ -434,25 +434,26 @@ header {
     }
   }
 
+
 /* 特征卡片 */
 .feature-card {
     position: relative;  
-    flex: 1;
+    min-width: 16rem;
+    height: 8rem;
     border: 1px solid rgba(55,65,81,0.5);
     background: rgba(55,65,81,0.3);
     color: #fff;
     padding: 1.5rem;
     border-radius: 0.5rem;
-    text-decoration: none;
     transition: all 0.3s ease;
     min-height: 80px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    transform-style: preserve-3d;
+    text-align: left;
     perspective: 1000px;
     isolation: isolate;
+    transition: transform 0.1s ease-out;
+    transform-style: preserve-3d;
+    will-change: transform;
 }
 
 .feature-card:hover {
@@ -494,18 +495,37 @@ header {
 }
 
 .carousel-container {
-    max-width: 1200px;
+    max-width: 100vw;
+    height: 80vh;
     margin: 0 auto;
     overflow: hidden;
     position: relative;
     padding: 0 3rem;
+    display: flex; /* 添加此行 */
+    flex-direction: column;
 }
 
 .slide-container {
     display: flex;
     flex-direction: column;
+    top: 0;
     gap: 1rem;
-    transition: transform 0.5s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    min-width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute; 
+    width: 100%; 
+    transform: translateX(20px);
+    left: 0;
+}
+
+.slide-container.active {
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transform: translateX(0px);
+    pointer-events: auto;
 }
 
 .row {
@@ -514,31 +534,18 @@ header {
     justify-content: center;
 }
 
-.carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    color: rgb(203 213 225);
-    width: 2.5rem;
-    height: 2.5rem;
-    cursor: pointer;
-    border-radius: 50%;
-    z-index: 10;
-}
-
-.prev-button { left: 0; }
-.next-button { right: 0; }
 
 .carousel-dots {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
-    margin-top: 1.5rem;
+    margin-top: 11rem;
+    position: relative;
+    z-index: 1;
 }
 
 .dot {
+    position: relative;
     width: 8px;
     height: 8px;
     border-radius: 100%;
@@ -557,4 +564,26 @@ header {
     .row {
         flex-direction: column;
     }
+}
+
+.carousel-button {
+    display: flex;
+    border: none;
+    color: rgb(203 213 225);
+    z-index: 10;
+    margin-top: 8rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.prev-button { 
+    position: absolute;
+    cursor: pointer;
+    left: 10%;
+}
+
+.next-button {
+    position: absolute;
+    cursor: pointer;
+    right: 10%;
 }

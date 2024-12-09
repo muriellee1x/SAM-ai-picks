@@ -1,52 +1,73 @@
 document.querySelectorAll('.feature-card').forEach(card => {
+    let timeout;
+    
     card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        if (timeout) {
+            cancelAnimationFrame(timeout);
+        }
         
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = (y - centerY) / 10;
-        const rotateY = (centerX - x) / 10;
-        
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        timeout = requestAnimationFrame(() => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // 降低旋转敏感度
+            const rotateX = ((y - centerY) / centerY) * 10;
+            const rotateY = ((x - centerX) / centerX) * 10;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
     });
     
     card.addEventListener('mouseleave', () => {
+        if (timeout) {
+            cancelAnimationFrame(timeout);
+        }
         card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
     });
 });
 
-const slideContainer = document.querySelector('.slide-container');
+const slideContainers = document.querySelectorAll('.slide-container');
+const dots = document.querySelectorAll('.dot');
 const prevButton = document.querySelector('.prev-button');
 const nextButton = document.querySelector('.next-button');
-const dots = document.querySelectorAll('.dot');
 
 let currentIndex = 0;
-const totalSlides = 2;
+const totalSlides = slideContainers.length;
 
-function updateCarousel() {
-    const offset = currentIndex * -100;
-    slideContainer.style.transform = `translateX(${offset}%)`;
-    
-    dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentIndex);
-    });
-}
+        // 初始化显示第一个
+        slideContainers[0].classList.add('active');
 
-prevButton.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-    updateCarousel();
-});
+        function updateCarousel(index) {
+            // 隐藏所有slide
+            slideContainers.forEach(container => {
+                container.classList.remove('active');
+            });
+            
+            // 显示当前slide
+            slideContainers[index].classList.add('active');
+            
+            // 更新dot状态
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
 
-nextButton.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % totalSlides;
-    updateCarousel();
-});
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateCarousel(currentIndex);
+        });
+        
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateCarousel(currentIndex);
+        });
 
-dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => {
-        currentIndex = index;
-        updateCarousel();
-    });
-});
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                updateCarousel(index);
+            });
+        });
