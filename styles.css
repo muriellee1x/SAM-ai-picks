@@ -394,10 +394,10 @@ header {
 
 /* 响应式调整 */
 @media (max-width: 1024px) {
-    .tabs {
+    /* .tabs {
         transform: scale(0.8);
         transform-origin: center;
-    }
+    } */
     .tab {
         width: 80px;  /* 移动端更窄的标签 */
     }
@@ -512,7 +512,6 @@ header {
     flex-direction: column;
     top: 0;
     gap: 1rem;
-    margin: 1rem;
     transition: opacity 0.5s ease, transform 0.5s ease;
     opacity: 0;
     pointer-events: none;
@@ -727,4 +726,19 @@ header {
     position: absolute;
     cursor: pointer;
     right: 10%;
+}
+
+.slide{
+    margin-bottom: 1rem;
+}
+
+.redirection{
+    /* position: relative; */
+    padding-top: 8rem;
+}
+
+.footer{
+    background-color: rgba(0,0,0,0.5);
+    color: rgb(203 213 225);
+    padding: 4rexm;
 }

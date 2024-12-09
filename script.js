@@ -76,27 +76,39 @@ const totalSlides = slideContainers.length;
 
         document.addEventListener('DOMContentLoaded', () => {
             const track = document.querySelector('.slider-container');
-            const slides = Array.from(track.children);
+            let slides = Array.from(track.children);
             const prevButton = document.querySelector('.slider-button.prev');
             const nextButton = document.querySelector('.slider-button.next');
-        
+            
+            // Store initial positions
+            const defaultPositions = slides.map(slide => {
+               const rect = slide.getBoundingClientRect();
+               return rect.left;
+            });
+            
             let currentIndex = 0;
-        
-            const updateSlidePosition = () => {
-                const slideWidth = slides[0].getBoundingClientRect().width;
-                track.style.transform = 'translateX(-' + (currentIndex * slideWidth) + 'px)';
+            
+            const updateSlidePositions = () => {
+               slides.forEach((slide, index) => {
+                   let newPositionIndex = (index - currentIndex + slides.length) % slides.length;
+                   let deltaPosition = defaultPositions[newPositionIndex] - defaultPositions[index];
+                   slide.style.transform = `translateX(${deltaPosition}px)`;
+                   slide.style.transition = 'transform 0.3s ease-in-out';
+               });
             };
-        
+            
             nextButton.addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % slides.length;
-                updateSlidePosition();
+               currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+               updateSlidePositions();
             });
-        
+            
             prevButton.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-                updateSlidePosition();
+               currentIndex = (currentIndex + 1) % slides.length;
+               updateSlidePositions();
             });
-        
+            
+            updateSlidePositions();     
+
             // 可选：自动轮播
             /*
             setInterval(() => {
