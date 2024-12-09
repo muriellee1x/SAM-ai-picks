@@ -68,6 +68,7 @@
 } */
 
 
+
 /* 跳转按钮 */
 .button-85 {
   padding: 0.75em 2.5em;
@@ -314,10 +315,11 @@ header {
     top: 0.5rem;   /* 与 tabs 的 padding 对齐 */
     /* 背景和边框设置 */
     border: 1px solid rgb(203 213 225);
+    background: rgba(0,0,0,0.5);
     background-clip: padding-box;
 }
 
-.glider::before {
+/* .glider::before {
     content: '';
     position: absolute;
     top: -2px;
@@ -354,7 +356,7 @@ header {
     background: black;
     border-radius: 9999px;
     z-index: -1;
-}
+} */
 
 /* Glider 位置调整 */
 .tabs input[id="radio-1"]:checked ~ .glider {
@@ -417,9 +419,9 @@ header {
     .tabs input[id="radio-6"]:checked ~ .glider {
         transform: translateX(400px);
     }
-    .tabs input[id="radio-7"]:checked ~ .glider {
+    /* .tabs input[id="radio-7"]:checked ~ .glider {
         transform: translateX(480px);
-    }
+    } */
 }
 
 @keyframes glowing {
@@ -500,7 +502,7 @@ header {
     margin: 0 auto;
     overflow: hidden;
     position: relative;
-    padding: 0 3rem;
+    /* padding: 0 3rem; */
     display: flex; /* 添加此行 */
     flex-direction: column;
 }
@@ -510,8 +512,8 @@ header {
     flex-direction: column;
     top: 0;
     gap: 1rem;
+    margin: 1rem;
     transition: opacity 0.5s ease, transform 0.5s ease;
-    min-width: 100%;
     opacity: 0;
     pointer-events: none;
     position: absolute; 
@@ -539,7 +541,7 @@ header {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
-    margin-top: 11rem;
+    margin-top: 20rem;
     position: relative;
     z-index: 1;
 }
@@ -568,21 +570,160 @@ header {
 
 .carousel-button {
     display: flex;
-    border: none;
     color: rgb(203 213 225);
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: rgba(203,213,225,0.3);
+    border-radius: 100%;
     z-index: 10;
-    margin-top: 8rem;
+    top:7rem;
     justify-content: center;
     align-items: center;
 }
 
-.prev-button { 
+.carousel-button.prev { 
+    position: absolute;
+    cursor: pointer;
+    left: 10%;
+
+}
+
+.carousel-button.next {
+    position: absolute;
+    cursor: pointer;
+    right: 10%;
+}
+
+/* 应用卡片 */
+.research-slider {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.slider-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.card {
+    text-align: center;
+    height: 36rem;
+    width: 24rem;
+    border: 1px solid rgba(55,65,81,0.5);
+    background: rgba(55,65,81,0.3);
+    text-align: left;
+    position: relative;  
+    transition: all 0.3s ease;
+    min-height: 80px;
+    text-align: left;
+    perspective: 1000px;
+    isolation: isolate;
+    transition: transform 0.1s ease-out;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+/* .feature-card {
+    position: relative;  
+    min-width: 16rem;
+    height: 8rem;
+    border: 1px solid rgba(55,65,81,0.5);
+    background: rgba(55,65,81,0.3);
+    color: #fff;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    min-height: 80px;
+    display: flex;
+    text-align: left;
+    perspective: 1000px;
+    isolation: isolate;
+    transition: transform 0.1s ease-out;
+    transform-style: preserve-3d;
+    will-change: transform;
+} */
+
+.card:hover {
+    border: 1px solid rgb(203 213 225);
+}
+.card:hover::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(
+        45deg,
+        black,
+        black,
+        #00d9ff,
+        #00d9ff,
+        #7700ff,
+        #7700ff,
+        black,
+        black
+    );
+    background-size: 200%;
+    animation: glowing 20s linear infinite;
+    z-index: -1;
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
+    border-radius: 0.5rem;
+}
+
+.card:hover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgb(2 6 23);
+    border-radius: 0.5rem;
+    z-index: -1;
+}
+
+.logo{
+    background-color:rgba(0,0,0,0.5);
+    height: 70%;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo:hover::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: black;
+    border-radius: 0.5rem;
+    z-index: -1;
+}
+
+.slider-button {
+    display: flex;
+    /* top:0; */
+    color: rgb(203 213 225);
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: rgba(203,213,225,0.3);
+    border-radius: 100%;
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider-button.prev {
     position: absolute;
     cursor: pointer;
     left: 10%;
 }
 
-.next-button {
+.slider-button.next {
     position: absolute;
     cursor: pointer;
     right: 10%;

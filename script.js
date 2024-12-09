@@ -1,4 +1,4 @@
-document.querySelectorAll('.feature-card').forEach(card => {
+document.querySelectorAll('.feature-card, .card').forEach(card => {
     let timeout;
     
     card.addEventListener('mousemove', e => {
@@ -30,10 +30,11 @@ document.querySelectorAll('.feature-card').forEach(card => {
     });
 });
 
+
 const slideContainers = document.querySelectorAll('.slide-container');
 const dots = document.querySelectorAll('.dot');
-const prevButton = document.querySelector('.prev-button');
-const nextButton = document.querySelector('.next-button');
+const prevButton = document.querySelector('.carousel-button.prev');
+const nextButton = document.querySelector('.carousel-button.next');
 
 let currentIndex = 0;
 const totalSlides = slideContainers.length;
@@ -71,3 +72,39 @@ const totalSlides = slideContainers.length;
                 updateCarousel(index);
             });
         });
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.querySelector('.slider-container');
+            const slides = Array.from(track.children);
+            const prevButton = document.querySelector('.slider-button.prev');
+            const nextButton = document.querySelector('.slider-button.next');
+        
+            let currentIndex = 0;
+        
+            const updateSlidePosition = () => {
+                const slideWidth = slides[0].getBoundingClientRect().width;
+                track.style.transform = 'translateX(-' + (currentIndex * slideWidth) + 'px)';
+            };
+        
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateSlidePosition();
+            });
+        
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                updateSlidePosition();
+            });
+        
+            // 可选：自动轮播
+            /*
+            setInterval(() => {
+                nextButton.click();
+            }, 5000); // 每5秒切换一次
+            */
+        });
+        
+
+
+        
