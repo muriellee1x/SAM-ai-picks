@@ -118,22 +118,48 @@ const totalSlides = slideContainers.length;
         });
 
 
-const buttonP = document.getElementById('button-P');
-const popup = document.getElementById('popup');
-const closePopup = document.getElementById('closePopup');
-
-buttonP.addEventListener('click', () => {
-    popup.style.display = 'block';
-    setTimeout(() => popup.classList.add('show'), 10);
-});
+const popup = document.getElementById('popup-static');
+const closePopup = document.getElementById('closePopup-static');
 
 closePopup.addEventListener('click', () => {
-    popup.classList.remove('show');
+    popup.classList.add('hide');
     popup.addEventListener('transitionend', () => {
-        if (!popup.classList.contains('show')) {
+        if (popup.classList.contains('hide')) {
             popup.style.display = 'none';
         }
     }, {once: true});
+});
+
+// const buttonP = document.getElementById('button-P');
+// const popup = document.getElementById('popup');
+// const closePopup = document.getElementById('closePopup');
+
+// buttonP.addEventListener('click', () => {
+//     popup.style.display = 'block';
+//     setTimeout(() => popup.classList.add('show'), 10);
+// });
+
+// closePopup.addEventListener('click', () => {
+//     popup.classList.remove('show');
+//     popup.addEventListener('transitionend', () => {
+//         if (!popup.classList.contains('show')) {
+//             popup.style.display = 'none';
+//         }
+//     }, {once: true});
+// });
+
+// 添加提示框显示逻辑
+document.addEventListener('DOMContentLoaded', () => {
+    const buttonP = document.getElementById('button-P');
+    const tooltip = document.getElementById('tooltip');
+    
+    buttonP.addEventListener('mouseenter', () => {
+        tooltip.style.display = 'block';
+    });
+    
+    buttonP.addEventListener('mouseleave', () => {
+        tooltip.style.display = 'none';
+    });
 });
 
         

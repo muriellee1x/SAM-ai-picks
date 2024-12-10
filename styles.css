@@ -134,10 +134,38 @@
     transition: transform 0.3s ease;
 }
 
+/* 添加禁用 active 状态的样式 */
+.button-85.no-active:active {
+    transform: none;
+}
+
+/* 添加提示框样式 */
+.tooltip {
+    display: none;
+    position: absolute;
+    background: white;
+    color: rgba(55,65,81);
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    transform: translateY(-3.5rem) translateX(4.5rem);
+    z-index: 100;
+}
+
+/* .tooltip::before {
+    content: '';
+    position: absolute;
+    top: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0.5rem;
+    border-style: solid;
+    border-color: transparent transparent rgba(55,65,81,0.9) transparent;
+} */
 
 /* 弹窗 */
-#popup {
-    /* display: none; */
+#popup-static {
+    display: block;
     position: fixed;
     right: 1.25rem;
     bottom: 4rem;
@@ -146,12 +174,11 @@
     height: 9rem;
     z-index: 1000;
     padding: 1rem;
-    transform: scale(0);
-    opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
-#popup svg {
+#popup-static svg {
     position: absolute;
     top: 0;
     left: 0;
@@ -159,7 +186,7 @@
     height: 110%;
 }
 
-#popup p {
+#popup-static p {
     position: relative;
     width: 10rem;
     top: 1.75rem;
@@ -169,7 +196,7 @@
     z-index: 2;
 }
 
-#closePopup {
+#closePopup-static {
     position: absolute;
     top: 2.75rem;
     right: 2.5rem;
@@ -179,11 +206,8 @@
     display: flex;
 }
 
-/* 添加显示时的样式 */
-#popup.show {
-    display: block;
-    transform: scale(1);
-    opacity: 1;
+#popup-static.hide {
+    opacity: 0;
 }
 
 /* 下滑箭头 */
@@ -319,7 +343,7 @@ header {
     transform: translateX(-50%);
     background-color: transparent;
     backdrop-filter: blur(10px);
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     border-radius: 99px;
     border: 1px solid rgba(55,65,81,0.5);
     background: rgba(55,65,81,0.3);
@@ -338,10 +362,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.9rem;
-    font-weight: 500;
-    width: 100px;  /* 统宽度 */
-    height: 40px;
+    width: 120px;
+    height: 50px;
     color: rgb(203 213 225);
     border-radius: 99px;
     cursor: pointer;
@@ -359,11 +381,11 @@ header {
 /* Glider 样式 */
 .glider {
     position: absolute;
-    height: 40px;
-    width: 100px;
+    height: 50px;
+    width: 120px;
     z-index: 1;
     border-radius: 9999px;
-    left: 0.5rem;  /* 与 tabs 的 padding 对齐 */
+    left: 1rem;  /* 与 tabs 的 padding 对齐 */
     top: 0.5rem;   /* 与 tabs 的 padding 对齐 */
     /* 背景和边框设置 */
     border: 1px solid rgb(203 213 225);
@@ -416,27 +438,27 @@ header {
 }
 
 .tabs input[id="radio-2"]:checked ~ .glider {
-    transform: translateX(100px);  /* 使用与 tab 相同的宽度 */
+    transform: translateX(120px);  /* 使用与 tab 相同的宽度 */
 }
 
 .tabs input[id="radio-3"]:checked ~ .glider {
-    transform: translateX(200px);
+    transform: translateX(240px);
 }
 
 .tabs input[id="radio-4"]:checked ~ .glider {
-    transform: translateX(300px);
+    transform: translateX(360px);
 }
 
 .tabs input[id="radio-5"]:checked ~ .glider {
-    transform: translateX(400px);
+    transform: translateX(480px);
 }
 
 .tabs input[id="radio-6"]:checked ~ .glider {
-    transform: translateX(500px);
+    transform: translateX(600px);
 }
 
 .tabs input[id="radio-7"]:checked ~ .glider {
-    transform: translateX(600px);
+    transform: translateX(720px);
 }
 
 /* 添加平滑过渡效果 */
@@ -493,7 +515,7 @@ header {
 .feature-card {
     position: relative;  
     min-width: 16rem;
-    height: 8rem;
+    height: 9rem;
     border: 1px solid rgba(55,65,81,0.5);
     background: rgba(55,65,81,0.3);
     color: #fff;
@@ -563,6 +585,7 @@ header {
     display: flex;
     flex-direction: column;
     top: 0;
+    margin-top: 1rem;
     gap: 1rem;
     transition: opacity 0.5s ease, transform 0.5s ease;
     opacity: 0;
@@ -627,7 +650,7 @@ header {
     background-color: rgba(203,213,225,0.3);
     border-radius: 100%;
     z-index: 10;
-    top:7rem;
+    top:9rem;
     justify-content: center;
     align-items: center;
 }
@@ -663,8 +686,8 @@ header {
 
 .card {
     text-align: center;
-    height: 30rem;
-    width: 20rem;
+    height: 32rem;
+    width: 22rem;
     border: 1px solid rgba(55,65,81,0.5);
     background: rgba(55,65,81,0.3);
     text-align: left;
@@ -740,7 +763,7 @@ header {
 
 .logo{
     background-color:rgba(0,0,0,0.5);
-    height: 60%;
+    height: 70%;
     vertical-align: middle;
     display: flex;
     justify-content: center;
@@ -785,10 +808,21 @@ header {
     margin-bottom: 1rem;
 }
 
-.redirection{
+.redirection3{
     /* position: relative; */
-    padding-top: 10rem;
+    padding-top: 12rem;
 }
+
+.redirection2{
+    /* position: relative; */
+    padding-top: 6rem;
+}
+
+.redirection1{
+    /* position: relative; */
+    padding-top: 20rem;
+}
+
 
 .footer{
     background-color: rgba(0,0,0,0.5);
