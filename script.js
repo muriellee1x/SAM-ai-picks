@@ -1,203 +1,165 @@
-let selectedIndex = 0;
-let carouselInterval;
-let isPaused = false;
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    // 获取搜索输入框
-    const searchInput = document.getElementById('searchInput');
+document.querySelectorAll('.feature-card, .card').forEach(card => {
+    let timeout;
     
-    // 获取所有建议标签按钮
-    const suggestionButtons = document.querySelectorAll('.flex.flex-wrap.justify-center.gap-4 button');
-    
-    // 为每个按钮添加点击事件监听器
-    suggestionButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // 更新正则表达式以匹配更多的特殊字符和表情符号
-            const buttonText = this.textContent
-                .replace(/[\u{1F300}-\u{1F9FF}\u{2700}-\u{27BF}\u{2600}-\u{26FF}]/gu, '')
-                .trim();
-            // 设置输入框的值
-            searchInput.value = buttonText;
-            // 让输入框获得焦点
-            searchInput.focus();
-        });
-    });
-});
-
-// 初始化分类按钮
-function initializeCategories() {
-    const container = document.getElementById('categoryScroll');
-    categories.forEach((category, index) => {
-        const button = document.createElement('button');
-        button.className = `category-button ${index === 0 ? 'selected' : ''}`;
-        button.innerHTML = `
-            <img src="${category.image}" alt="">
-            <span>${category.name}</span>
-        `;
-        button.onclick = () => selectCategory(index);
-        container.appendChild(button);
-    });
-}
-
-// 选择分类
-function selectCategory(index) {
-    const buttons = document.querySelectorAll('.category-button');
-    buttons[selectedIndex].classList.remove('selected');
-    buttons[index].classList.remove('selected');
-    selectedIndex = index;
-    buttons[selectedIndex].classList.add('selected');
-
-    buttons[selectedIndex].scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center'
-    });
-}
-
-// 滚动控制
-function initializeScroll() {
-    const container = document.getElementById('categoryScroll');
-    const leftButton = document.getElementById('scrollLeft');
-    const rightButton = document.getElementById('scrollRight');
-
-    function checkScroll() {
-        const { scrollLeft, scrollWidth, clientWidth } = container;
-        leftButton.style.display = scrollLeft > 0 ? 'flex' : 'none';
-        rightButton.style.display = scrollLeft < scrollWidth - clientWidth - 1 ? 'flex' : 'none';
-    }
-
-    container.addEventListener('scroll', checkScroll);
-    checkScroll();
-
-    leftButton.onclick = () => {
-        container.scrollBy({ left: -200, behavior: 'smooth' });
-    };
-
-    rightButton.onclick = () => {
-        container.scrollBy({ left: 200, behavior: 'smooth' });
-    };
-}
-
-// Header scroll effect
-function initializeHeaderEffect() {
-    const header = document.getElementById('header');
-    let lastScrollY = window.scrollY;
-
-    window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
-        
-        // 向下滚动时增加不透明度
-        if (currentScrollY > lastScrollY) {
-            header.querySelector('.container').classList.remove('bg-black/50');
-            header.querySelector('.container').classList.add('bg-black/80');
-        } 
-        // 向上滚动或回到顶部时恢复原来的透明度
-        else {
-            header.querySelector('.container').classList.remove('bg-black/80');
-            header.querySelector('.container').classList.add('bg-black/50');
+    card.addEventListener('mousemove', e => {
+        if (timeout) {
+            cancelAnimationFrame(timeout);
         }
         
-        lastScrollY = currentScrollY;
-    });
-}
-
-// 添加图片3D效果处理函数
-function initializeImagePerspective() {
-    const container = document.getElementById('featureTagsContainer');
-    const card = document.getElementById('feature-tag-image-container');
-    
-    const handleMouseMove = (e) => {
-        const rect = container.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const maxRotation = 15;
-        
-        const rotateY = ((x - centerX) / centerX) * maxRotation;
-        const rotateX = -((y - centerY) / centerY) * maxRotation;
-        
-        card.classList.add('tilting');
-        
-        card.style.transform = `
-            perspective(1000px)
-            rotateX(${rotateX}deg)
-            rotateY(${rotateY}deg)
-            scale3d(1.05, 1.05, 1.05)
-        `;
-    };
-    
-    const handleMouseLeave = () => {
-        card.classList.remove('tilting');
-        card.style.transform = `
-            perspective(1000px)
-            rotateX(0deg)
-            rotateY(0deg)
-            scale3d(1, 1, 1)
-        `;
-    };
-    
-    const handleMouseEnter = () => {
-        card.classList.add('tilting');
-    };
-
-    container.addEventListener('mousemove', handleMouseMove);
-    container.addEventListener('mouseleave', handleMouseLeave);
-    container.addEventListener('mouseenter', handleMouseEnter);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('searchInput');
-    const tags = document.querySelectorAll('.suggestion-tag');
-    
-    tags.forEach(tag => {
-        tag.addEventListener('click', () => {
-            // 移除其他标签的选中状态
-            tags.forEach(t => t.classList.remove('active'));
-            // 为当前点击的标签添加选中状态
-            tag.classList.add('active');
+        timeout = requestAnimationFrame(() => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
             
-            // 使用相同的表情符号清理逻辑
-            const cleanText = tag.textContent
-                .replace(/[\u{1F300}-\u{1F9FF}\u{2700}-\u{27BF}\u{2600}-\u{26FF}]/gu, '')
-                .trim();
-                
-            // 更新搜索框内容
-            if (searchInput) {
-                searchInput.value = cleanText;
-                searchInput.focus();
-            }
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // 降低旋转敏感度
+            const rotateX = ((y - centerY) / centerY) * 10;
+            const rotateY = ((x - centerX) / centerX) * 10;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
     });
-});
-
-// 在初始化分类按钮的部分添加以下代码
-function selectCategory(button) {
-    // 移除所有按钮的 active 状态和 shine 效果
-    document.querySelectorAll('.category-button').forEach(btn => {
-        btn.classList.remove('active');
-        btn.removeAttribute('data-shine-border');
-        // 移除可能存在的 shine-border 相关元素
-        const parent = btn.parentElement;
-        if (parent && parent.classList.contains('shine-border-gradient')) {
-            parent.replaceWith(btn);
+    
+    card.addEventListener('mouseleave', () => {
+        if (timeout) {
+            cancelAnimationFrame(timeout);
         }
-    });
-
-    // 添加新的 active 状态和 shine 效果
-    button.classList.add('active');
-    button.setAttribute('data-shine-border', '');
-    // 重新初始化当前按钮的 shine 效果
-    new ShineBorder(button);
-}
-
-// 为所有分类按钮添加点击事件
-document.querySelectorAll('.category-button').forEach(button => {
-    button.addEventListener('click', (e) => {
-        e.preventDefault();
-        selectCategory(button);
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
     });
 });
+
+
+const slideContainers = document.querySelectorAll('.slide-container');
+const dots = document.querySelectorAll('.dot');
+const prevButton = document.querySelector('.carousel-button.prev');
+const nextButton = document.querySelector('.carousel-button.next');
+
+let currentIndex = 0;
+const totalSlides = slideContainers.length;
+
+        // 初始化显示第一个
+        slideContainers[0].classList.add('active');
+
+        function updateCarousel(index) {
+            // 隐藏所有slide
+            slideContainers.forEach(container => {
+                container.classList.remove('active');
+            });
+            
+            // 显示当前slide
+            slideContainers[index].classList.add('active');
+            
+            // 更新dot状态
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateCarousel(currentIndex);
+        });
+        
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateCarousel(currentIndex);
+        });
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                updateCarousel(index);
+            });
+        });
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.querySelector('.slider-container');
+            let slides = Array.from(track.children);
+            const prevButton = document.querySelector('.slider-button.prev');
+            const nextButton = document.querySelector('.slider-button.next');
+            
+            // Store initial positions
+            const defaultPositions = slides.map(slide => {
+               const rect = slide.getBoundingClientRect();
+               return rect.left;
+            });
+            
+            let currentIndex = 0;
+            
+            const updateSlidePositions = () => {
+               slides.forEach((slide, index) => {
+                   let newPositionIndex = (index - currentIndex + slides.length) % slides.length;
+                   let deltaPosition = defaultPositions[newPositionIndex] - defaultPositions[index];
+                   slide.style.transform = `translateX(${deltaPosition}px)`;
+                   slide.style.transition = 'transform 0.3s ease-in-out';
+               });
+            };
+            
+            nextButton.addEventListener('click', () => {
+               currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+               updateSlidePositions();
+            });
+            
+            prevButton.addEventListener('click', () => {
+               currentIndex = (currentIndex + 1) % slides.length;
+               updateSlidePositions();
+            });
+            
+            updateSlidePositions();     
+
+            // 可选：自动轮播
+
+            // setInterval(() => {
+            //     nextButton.click();
+            // }, 3000); 
+
+        });
+
+
+const popup = document.getElementById('popup-static');
+const closePopup = document.getElementById('closePopup-static');
+
+closePopup.addEventListener('click', () => {
+    popup.classList.add('hide');
+    popup.addEventListener('transitionend', () => {
+        if (popup.classList.contains('hide')) {
+            popup.style.display = 'none';
+        }
+    }, {once: true});
+});
+
+// const buttonP = document.getElementById('button-P');
+// const popup = document.getElementById('popup');
+// const closePopup = document.getElementById('closePopup');
+
+// buttonP.addEventListener('click', () => {
+//     popup.style.display = 'block';
+//     setTimeout(() => popup.classList.add('show'), 10);
+// });
+
+// closePopup.addEventListener('click', () => {
+//     popup.classList.remove('show');
+//     popup.addEventListener('transitionend', () => {
+//         if (!popup.classList.contains('show')) {
+//             popup.style.display = 'none';
+//         }
+//     }, {once: true});
+// });
+
+// 添加提示框显示逻辑
+document.addEventListener('DOMContentLoaded', () => {
+    const buttonP = document.getElementById('button-P');
+    const tooltip = document.getElementById('tooltip');
+    
+    buttonP.addEventListener('mouseenter', () => {
+        tooltip.style.display = 'block';
+    });
+    
+    buttonP.addEventListener('mouseleave', () => {
+        tooltip.style.display = 'none';
+    });
+});
+
+        

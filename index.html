@@ -9,11 +9,16 @@
     <script src="shine-border.js"></script>
 </head>
 <body class="min-h-screen bg-black">
+    <!-- 添加背景容器在最前面 -->
+    <div id="bg-wrap">
+        <div class="el"></div>
+    </div>
     <!-- 固定顶部导航 -->
-    <header class="border-b border-gray-800/50 sticky top-0 z-10 transition-all duration-300" id="header">
-        <div class="container px-8 py-6 backdrop-blur-md bg-black/50">
-            <h1 class="text-xl font-regular tracking-wider text-slate-200">AI 产品精选</h1>
-        </div>
+    <header class="border-b border-slate-300/10 sticky top-0 transition-all duration-300 px-8 py-6 backdrop-blur-md cursor-pointer" id="header">
+        <a href="#introSection">
+            <img src="images/SAM_logo小.png" alt="AI 产品精选" class="h-8">
+            <!-- <h class="text-xl font-semibold text-white">AI 产品精选</h> -->
+        </a>
     </header>
 
     <!-- 主要内容区域 -->
@@ -21,99 +26,241 @@
         <div class="max-w-8xl mx-auto grid grid-cols-12 gap-8">
 
             <!-- 第一部分 -->
-            <div class="h-screen col-start-3 col-span-8 space-y-6">
-                <!-- 搜索部分 -->
-                <div class="pt-72 space-y-10 text-center">
-                    <h2 class="text-2xl font-semibold md:text-3xl text-slate-200">
-                        你想了解什么 AI 产品 / 用 AI 解决什么问题?
-                    </h2>
-                    <div class="relative">
-                        <input type="text" 
-                            id="searchInput"
-                            class="h-12 pl-6 pr-12 text-lg w-full bg-gray-900 text-white placeholder-gray-400" 
-                            placeholder="问问Sam">
-                        <button class="absolute right-2 top-1/2 -translate-y-1/2 p-2 hover:bg-gray-800 rounded-full text-gray-400">
-                            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                    </div>
+            <div id="introSection" class="redirection1 h-screen col-start-3 col-span-8 space-y-20">
+                <!-- 标题 -->
+                <div class="space-y-10 text-center">
+                    <h class="text-6xl font-semibold text-white">
+                        找到让你更有创造力的最佳 AI 产品
+                    </h>
+                    <p class="text-xl text-slate-300 leading-9">
+                        精选各类 AI 产品和解决方案，帮你快速了解产品特点，为你的灵感找到合适的实现工具
+                        <br/>
+                        想了解什么 AI 产品，想用 AI 实现什么效果，也可以直接问问小助手 SAM
+                    </p>
                 </div>
 
-                <!-- 建议标签 -->
-                <div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto px-4 pb-20 pt-8">
-                    <button class="suggestion-tag px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white transition-all duration-200">🤓 帮我介绍一下 Recraft</button>
-                    <button class="suggestion-tag px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white transition-all duration-200">🤔 我想制作视频课，应该怎么办？</button>
-                    <button class="suggestion-tag px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white transition-all duration-200">🤗 最近有哪些好玩的 AI 产品？</button>
-                    <button class="suggestion-tag px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white transition-all duration-200">✨ 我想生成一张圣诞节写真</button>
-                    <button class="suggestion-tag px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white transition-all duration-200">💡 我想试试最新的 AI 视频效果</button>
-                    <button class="suggestion-tag px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 text-white transition-all duration-200">👀 随便看看</button>
+                <!-- 跳转按钮 -->
+                <div class="flex justify-center items-center space-x-8">
+                    <a href="https://km.sankuai.com/collabpage/2582261682" target="_blank">
+                        <button class="button-85" role="button">看看文档</button>
+                    </a>
+                    <button class="button-85 no-active" role="button" id="button-P">问问 SAM</button>
+                    <!-- 添加提示弹窗 -->
+                    <div id="tooltip" class="tooltip rounded-lg text-base font-medium">试试点击页面右下角紫色头像</div>
+                </div>
+
+                <!-- 箭头 -->
+                <a href="#categorySection" class="go-down-arrow h-6 w-6 ">
+                    <div class="go-down-arrow-top"></div>
+                    <div class="go-down-arrow-bottom"></div>
+                </a>
+
+                <div id="popup-static" class="rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" version="1.1" width="263" height="147.5859375" viewBox="0 0 263 147.5859375">
+                        <defs>
+                            <filter id="popup_shadow" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB" x="-48" y="-40" width="287" height="168">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                <feOffset dy="8" dx="0" />
+                                <feGaussianBlur stdDeviation="12" />
+                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0" />
+                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                            </filter>
+                        </defs>
+                        <g filter="url(#popup_shadow)">
+                            <!-- 主体白色矩形 -->
+                            <rect x="36" y="28" width="191" height="72" rx="6" fill="#FFFFFF" />
+                            <!-- 底部三角形箭头 -->
+                            <path d="M206,99L216,99L216,100L215.82843,100C215.29799,100,214.78929,100.21071,214.41421,100.58579L211.70711,103.29289C211.31658,103.68342,210.68342,103.68342,210.29289,103.29289L207.58579,100.58579C207.21071,100.21071,206.702006,100,206.171573,100L206,100L206,99Z" fill-rule="evenodd" fill="#FFFFFF" />
+                        </g>
+                    </svg>
+                    <span class="close text-base font-medium" id="closePopup-static">&#10005;</span>
+                    <p class="text-base font-medium">
+                        关于AI的任何问题，
+                        <br/>
+                        都可以问我哦～
+                    </p>
                 </div>
             </div>
 
             <!-- 第二部分 -->
-            <div class="h-screen col-start-3 col-span-8 space-y-6">
+            <div id="categorySection" class="redirection2 h-screen col-span-12 space-y-4 justify-center items-center">
+                <div class="text-center">
+                    <h class="text-4xl font-medium text-white">
+                        按分类查找 AI 产品
+                    </h>
+                </div>
+                <br/>
 
-                <h2 class="text-2xl text-center pt-10 font-medium md:text-3xl text-slate-200">
-                    当前有哪些最新 AI 能力？
-                </h2>
-
-                <div class="category-container relative">   
-                    <!-- 分类按钮容器 -->
-                    <div class="flex justify-center items-center space-x-4 overflow-x-auto scrollbar-hide py-2">
-                        <!-- 分类按钮示例 -->
-                        <a href="#" class="category-button">
-                            <span>文本</span>
-                        </a>
-                        
-                        <a href="#" class="category-button active">
-                            <span>图像</span>
-                        </a>
-                        
-                        <a href="#" class="category-button">
-                            <span>音频</span>
-                        </a>
-                        
-                        <a href="#" class="category-button">
-                            <span>视频</span>
-                        </a>
-                        
-                        <a href="#" class="category-button">
-                            <span>数字人</span>
-                        </a>
-
-                        <a href="#" class="category-button">
-                            <span>行业应用</span>
-                        </a>
-
-                        <a href="#" class="category-button">
-                            <span>Agent</span>
-                        </a>
-                    </div>
+                <div class="tabs">
+                    <input type="radio" id="radio-1" name="tabs" checked>
+                    <label class="tab text-base font-medium" for="radio-1">文本</label>
+                    
+                    <input type="radio" id="radio-2" name="tabs">
+                    <label href="#image" class="tab text-base font-medium" for="radio-2">图像</label>
+                    
+                    <input type="radio" id="radio-3" name="tabs">
+                    <label class="tab text-base font-medium" for="radio-3">音频</label>
+                    
+                    <input type="radio" id="radio-4" name="tabs">
+                    <label class="tab text-base font-medium" for="radio-4">视频</label>
+                    
+                    <input type="radio" id="radio-5" name="tabs">
+                    <label class="tab text-base font-medium" for="radio-5">数字人</label>
+                    
+                    <!-- <input type="radio" id="radio-6" name="tabs">
+                    <label class="tab" for="radio-6">行业应用</label> -->
+                    
+                    <input type="radio" id="radio-6" name="tabs">
+                    <label class="tab text-base text-medium" for="radio-6">Agent</label>
+                    
+                    <span class="glider"></span>
                 </div>
 
-                <!-- 核心介绍 -->
-                <div class="space-y-4 text-center">
-                    <p class="text-base text-slate-400 tracking-wider leading-7">
-                        涵盖四大核心领域：<span class="font-medium text-slate-200">图像生成、编辑、理解及综合方案</span>
-                        <br>
-                        精选功能卓越的模型和应用，满足多样使用场景
+                <!-- 内容介绍 -->
+                <div class="text-center pt-4">
+                    <p class="text-xl text-slate-300 leading-7">
+                        内容涵盖：<span class="font-medium text-white">图像生成、编辑、理解及综合方案</span>
                     </p>
                 </div>
 
-                <!-- 特征标签 -->
+                <!-- 特征卡片 -->
+                <div id="image" class="carousel-container">
+                    <div class="slide-container active">
+                        <div class="row">
+                            <a href="https://km.sankuai.com/collabpage/2563917399#b-a3e19cc569f04943b6bb259d6d5b4d84" class="feature-card rounded-lg font-medium text-xl" target="_blank">
+                                文生图
+                                <br/>
+                                Text to Image
+                            </a>
+                            <a href="https://km.sankuai.com/collabpage/2563917399#b-448213376fac45608f46436abe7de4e2" class="feature-card rounded-lg font-medium text-xl" target="_blank">
+                                图生图
+                                <br/>
+                                Image to Image
+                            </a>
+                            <a href="https://km.sankuai.com/collabpage/2563917399#b-9ad87957440b44d381c073608db29365" class="feature-card rounded-lg font-medium text-xl" target="_blank">
+                                可控图像生成
+                                <br/>
+                                Controllable
+                                <br/>
+                                Image Generation
+                            </a>
+                            <a href="https://km.sankuai.com/collabpage/2563917399#b-4e207c2258f7482ca7f237e8559a3248" class="feature-card rounded-lg font-medium text-xl" target="_blank">
+                                图像增强
+                                <br/>
+                                Image Enhancement
+                            </a>
+                        </div>
+                        <div class="row">
+                            <a href="https://km.sankuai.com/collabpage/2563917399#b-6e34b2cfe1304b8caeca874159be41c5" class="feature-card rounded-lg font-medium text-xl" target="_blank">
+                                局部重绘
+                                <br/>
+                                Inpainting
+                            </a>
+                            <a href="https://km.sankuai.com/collabpage/2563917399#b-289ab273a1de4dc691937719853948e4" class="feature-card rounded-lg font-medium text-xl" target="_blank">
+                                扩展填充
+                                <br/>
+                                Outpainting
+                            </a>
+                            <a href="https://km.sankuai.com/collabpage/2563917399#b-d45cbdf2886440a495b492d0cc5cf1f7" class="feature-card rounded-lg font-medium text-xl" target="_blank">
+                                重新打光
+                                <br/>
+                                ReLight
+                            </a>
+                            <a href="https://km.sankuai.com/collabpage/2563917399#b-12d429fab522436f907733556fa5935b" class="feature-card rounded-lg font-medium text-xl" target="_blank">
+                                人物换脸
+                                <br/>
+                                Face Swap
+                            </a>
+                        </div>
+                    </div>
+                    <div class="slide-container">
+                        <div class="row">
+                            <a href="https://km.sankuai.com/collabpage/2563917399#b-30006f333e0648c2bd66a6e96fc5d36a" class="feature-card rounded-lg font-medium text-xl" target="_blank">
+                                动作编辑
+                                <br/>
+                                Action Editing
+                            </a>
+                            <a href="https://km.sankuai.com/collabpage/2563917399#b-e9f203f7ffc54458bdd036cc7a56d4a7" class="feature-card rounded-lg font-medium text-xl" target="_blank">
+                                质量评估
+                                <br/>
+                                Quality Assessment
+                            </a>
+                            <a href="https://km.sankuai.com/collabpage/2563917399#b-7c63c536996449d3825a6e1c381a1c3d" class="feature-card rounded-lg font-medium text-xl" target="_blank">
+                                内容识别
+                                <br/>
+                                Content Recognition
+                            </a>
+                            <a href="https://km.sankuai.com/collabpage/2563917399#b-d23853b3ad1d4e11b37195e0f600d190" class="feature-card rounded-lg font-medium text-xl" target="_blank">
+                                AI 商品图
+                                <br/>
+                                AI Product Image
+                            </a>
+                        </div>
+                        <div class="row">
+                            <a href="https://km.sankuai.com/collabpage/2563917399#b-789e63d552fe4b47b2057f66459cce3d" class="feature-card rounded-lg font-medium text-xl" target="_blank">
+                                AI 滤镜
+                                <br/>
+                                AI Filter
+                            </a>
+                            <a href="#https://km.sankuai.com/collabpage/2563917399#b-d94ea086e8ae4994ad7e4f2a5556ba01" class="feature-card rounded-lg font-medium text-xl" target="_blank">
+                                AI 写真
+                                <br/>
+                                AI Portrait
+                            </a>
+                            <a href="https://km.sankuai.com/collabpage/2563917399#b-b0403c0d2a0d41a1bc6000efc26f51aa" class="feature-card rounded-lg font-medium text-xl" target="_blank">
+                                AI 试穿
+                                <br/>
+                                AI Try On
+                            </a>
+                            <a href="https://km.sankuai.com/collabpage/2563917399#b-8925285f3eb443cd82ed31e03dc41955" class="feature-card rounded-lg font-medium text-xl" target="_blank">
+                                图像生成社区
+                                <br/>
+                                Image Generation
+                                <br/>
+                                Community
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-button prev">←</button>
+                    <button class="carousel-button next">→</button>
+
+                    <div class="pt-80">
+                        <a href="https://km.sankuai.com/collabpage/2563917399" target="_blank" class="pt-12 flex justify-center items-center">
+                            <button class="button-85">了解全部</button>
+                        </a>
+                    </div>
+
+                    <!-- <div class="carousel-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                    </div> -->
+
+                    <!-- 箭头 -->
+                    <div class="pt-20">
+                        <a href="#applicationSection" class="go-down-arrow h-6 w-6">
+                            <div class="go-down-arrow-top"></div>
+                            <div class="go-down-arrow-bottom"></div>
+                        </a>
+                    </div>
+                </div>
+                
+
+                <!-- 特征标签
                 <div id="featureTagsContainer" class="relative flex items-center justify-center overflow-hidden py-2">
                     <div id="feature-tag-image-container" class="overflow-hidden w-2/3 h-80 rounded-lg hover:scale-[1.02] transition-all duration-500">
                         <a href="https://km.sankuai.com/collabpage/2563917399" target="_blank"><img src="images/abstract-patreperesent-classic-art.jpg" class="w-full h-auto object-cover hover:scale-[1.02] transition-all duration-500"/></a>
                     </div>
                     <div id="feature-tags-container" class="absolute w-full h-full pointer-events-none">
-                        <a href="https://km.sankuai.com/collabpage/2563917399#b-a3e19cc569f04943b6bb259d6d5b4d84" class="feature-tag" style="left: 0%; top: 10%;" target="_blank">
+                        <a href="https://km.sankuai.com/collabpage/2563917399#b-a3e19cc569f04943b6bb259d6d5b4d84" class="feature-tag dark" style="left: 0%; top: 10%;" target="_blank">
                             # 文生图 Text to Image
                         </a>
                         <a href="https://km.sankuai.com/collabpage/2563917399#b-448213376fac45608f46436abe7de4e2" class="feature-tag" style="left: 15%; top: 30%;" target="_blank">
                             # 图生图 Image to Image
                         </a>
-                        <a href="https://km.sankuai.com/collabpage/2563917399#b-dfcbc07a79aa45758db97697d983cd84" class="feature-tag" style="right: 10%; top: 40%;" target="_blank">
+                        <a href="https://km.sankuai.com/collabpage/2563917399#b-dfcbc07a79aa45758db97697d983cd84" class="feature-tag dark" style="right: 10%; top: 40%;" target="_blank">
                             # 线稿生图 Sketch to Image
                         </a>
                         <a href="https://km.sankuai.com/collabpage/2563917399#b-dfe6ef5875ce41b8b71cf09308910bdb" class="feature-tag" style="right: 0%; top: 60%;" target="_blank">
@@ -126,64 +273,107 @@
                             # 图像生成社区 Image Generation Community
                         </a>
                     </div>
-                </div>
-
-                <div class="space-y-4 text-center">
-                    <a href="https://km.sankuai.com/collabpage/2563917399" class="inline-block pt-2" target="_blank">
-                        <button class="px-10 py-2 rounded-full font-medium text-slate-200">了解全部</button>
-                    </a>
-                </div>
+                </div> -->
             </div>
 
             <!-- 第三部分 -->
-            <div class="h-screen col-start-3 col-span-8 sp
-            ace-y-6">
-
-                <h2 class="text-2xl text-slate-200 pt-40 text-center font-medium md:text-3xl text-slate-200">
-                    大家在用 AI 产品解决什么问题?
-                </h2>
-                
-                <!-- 轮播组件 -->
-                <div id="circularCarousel" class="relative w-full h-[500px] overflow-hidden mt-100">
-                    <div class="absolute w-full h-full flex items-center justify-center">
-                        <!-- 卡片将通过 JS 动态生成 -->
-                    </div>
-                    
-                    <!-- 导航控制 -->
-                    <div class="absolute bottom-4 left-0 right-0 flex justify-center items-center gap-4">
-                        <button class="carousel-nav-btn">
-                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="white">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-                        <div id="carouselDots" class="flex gap-2">
-                            <!-- 点状导航将通过 JS 动态生成 -->
-                        </div>
-                        <button class="carousel-nav-btn">
-                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="white">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
+            <div id="applicationSection" class="redirection3 h-screen col-span-12 space-y-6">
+                <div class="text-center">
+                    <h class="text-4xl text-center pt-10 font-medium text-white">
+                        常见需求可以这样实现
+                    </h>
                 </div>
 
+                <!-- 应用卡片 -->
+                <div class="research-slider pt-8">
+                    <div class="slider-container space-x-4">
+                        <div class="slide">
+                            <div class="card rounded-lg">
+                                <div class="logo rounded-lg">
+                                    <img src="images/christmas-tree.png" class="w-2/3 h-auto hover:scale-[1.1] transition-all duration-500"/>
+                                </div>
+                                <div class="p-6 space-y-4">
+                                    <h class="pt-4 text-xl text-white font-medium">拍立得风格圣诞写真</h>
+                                    <p class="text-base text-slate-300 leading-7">使用 Stable Diffusion 模型，结合 LoRA 微调，快速生成拍立得风格的圣诞主题写真照片</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <div class="card rounded-lg">
+                                <div class="logo rounded-lg">
+                                    <img src="images/agent.png" class="w-2/3 h-auto hover:scale-[1.1] transition-all duration-500"/>
+                                </div>
+                                <div class="p-6 space-y-4">
+                                    <h class="pt-4 text-xl text-white font-medium">AI 数字人直播带货</h>
+                                    <p class="text-base text-slate-300 leading-7">利用 D-ID 和 Heygen 等工具，打造专属数字人，进行商品展示和直播推广</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <div class="card rounded-lg">
+                                <div class="logo rounded-lg">
+                                    <img src="images/mv-edit.png" class="w-2/3 h-auto hover:scale-[1.1] transition-all duration-500"/>
+                                </div>
+                                <div class="p-6 space-y-4">
+                                    <h class="pt-4 text-xl text-white font-medium">AI 视频课制作</h>
+                                    <p class="text-base text-slate-300 leading-7">利用 AI 工具，快速生成视频课程，提高教学效率</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <div class="card rounded-lg">
+                                <div class="logo rounded-lg">
+                                    <img src="images/mock-up.png" class="w-2/3 h-auto hover:scale-[1.1] transition-all duration-500"/>
+                                </div>
+                                <div class="p-6 space-y-4">
+                                    <h class="pt-4 text-xl text-white font-medium">AI MockUP</h>
+                                    <p class="text-base text-slate-300 leading-7">利用 AI 工具，快速生成商品 MockUP 图片，提高设计效率</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slide">
+                            <div class="card rounded-lg">
+                                <div class="logo rounded-lg">
+                                    <img src="images/3d.png" class="w-2/3 h-auto hover:scale-[1.1] transition-all duration-500"/>
+                                </div>
+                                <div class="p-6 space-y-4">
+                                    <h class="pt-4 text-xl text-white font-medium">3D 立体图标生成</h>
+                                    <p class="text-base text-slate-300 leading-7">利用 AI 工具，快速生成 3D 立体图标，提高设计效率</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="slider-button prev">←</div>
+                    <div class="slider-button next">→</div>
+                </div>
+            </div>
+
+            <div class="col-span-12 footer py-6 text-center text-xs">
+                © 基础研发设计中心 智能创新设计组 2025
             </div>
         </div>
     </main>
 </body>
 <script src="script.js"></script>
-<script src="carousel.js"></script>
 <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.0.0-beta.4/libs/cn/index.js"></script>
-<script>
-    new CozeWebSDK.WebChatClient({
-      config: {
-        bot_id: '7444006377292529715',
-      },
-      componentProps: {
-        title: 'Coze',
-      },
-    });
-</script>
+    <script>
+        new CozeWebSDK.WebChatClient({
+          config: {
+            bot_id: '7444006377292529715',
+          },
+          componentProps: {
+            title: 'AI 产品精选',
+            icon:'https://ice.frostsky.com/2024/12/09/c2a4938eebe6e95b2062f0b2ad11b400.png',
+            width:'80%',
+            layout:'pc'
+          },
+        });
+    </script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         initShineBorders();
