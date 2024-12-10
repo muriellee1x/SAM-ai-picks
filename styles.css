@@ -134,6 +134,58 @@
     transition: transform 0.3s ease;
 }
 
+
+/* 弹窗 */
+#popup {
+    /* display: none; */
+    position: fixed;
+    right: 1.25rem;
+    bottom: 4rem;
+    transform: none;
+    width: 18rem;
+    height: 9rem;
+    z-index: 1000;
+    padding: 1rem;
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#popup svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 110%;
+    height: 110%;
+}
+
+#popup p {
+    position: relative;
+    width: 10rem;
+    top: 1.75rem;
+    left: 3.5rem;
+    text-align: left;
+    color: rgba(55,65,81);
+    z-index: 2;
+}
+
+#closePopup {
+    position: absolute;
+    top: 2.75rem;
+    right: 2.5rem;
+    cursor: pointer;
+    z-index: 2;
+    color: rgba(55,65,81);
+    display: flex;
+}
+
+/* 添加显示时的样式 */
+#popup.show {
+    display: block;
+    transform: scale(1);
+    opacity: 1;
+}
+
 /* 下滑箭头 */
 .go-down-arrow {
     cursor: pointer;
@@ -611,8 +663,8 @@ header {
 
 .card {
     text-align: center;
-    height: 36rem;
-    width: 24rem;
+    height: 30rem;
+    width: 20rem;
     border: 1px solid rgba(55,65,81,0.5);
     background: rgba(55,65,81,0.3);
     text-align: left;
@@ -650,6 +702,7 @@ header {
 .card:hover {
     border: 1px solid rgb(203 213 225);
 }
+
 .card:hover::before {
     content: '';
     position: absolute;
@@ -687,7 +740,7 @@ header {
 
 .logo{
     background-color:rgba(0,0,0,0.5);
-    height: 70%;
+    height: 60%;
     vertical-align: middle;
     display: flex;
     justify-content: center;
@@ -734,7 +787,7 @@ header {
 
 .redirection{
     /* position: relative; */
-    padding-top: 8rem;
+    padding-top: 10rem;
 }
 
 .footer{

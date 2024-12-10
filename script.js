@@ -110,13 +110,30 @@ const totalSlides = slideContainers.length;
             updateSlidePositions();     
 
             // 可选：自动轮播
-            /*
-            setInterval(() => {
-                nextButton.click();
-            }, 5000); // 每5秒切换一次
-            */
-        });
-        
 
+            // setInterval(() => {
+            //     nextButton.click();
+            // }, 3000); 
+
+        });
+
+
+const buttonP = document.getElementById('button-P');
+const popup = document.getElementById('popup');
+const closePopup = document.getElementById('closePopup');
+
+buttonP.addEventListener('click', () => {
+    popup.style.display = 'block';
+    setTimeout(() => popup.classList.add('show'), 10);
+});
+
+closePopup.addEventListener('click', () => {
+    popup.classList.remove('show');
+    popup.addEventListener('transitionend', () => {
+        if (!popup.classList.contains('show')) {
+            popup.style.display = 'none';
+        }
+    }, {once: true});
+});
 
         
